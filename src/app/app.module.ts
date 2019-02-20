@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HatoolLibModule } from 'hatool';
@@ -10,6 +11,7 @@ import { HatoolLibModule } from 'hatool';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     HatoolLibModule,
   ],
   providers: [],
