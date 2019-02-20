@@ -2,6 +2,84 @@ import { Component, OnInit } from '@angular/core';
 import { ContentService } from 'hatool';
 import { HubspotService } from './hubspot.service';
 
+const offenders =
+[
+      {value: 0,
+      display: 'משטרה',
+      displayValue: 'משטרה',
+      complaints: [
+                {value: 'התנהגות או התבטאות גזענית מצד שוטר/ת',
+                  display: 'התנהגות או התבטאות גזענית מצד שוטר/ת'},
+                {value: 'פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה',
+                  display: 'פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה'},
+                {value: 'אחר',
+                  display: 'אחר'},
+              ],
+      services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
+              {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
+                ],
+      relevant_recipients: [ {value: 'מח"ש', display: 'מחלקת חקירות שוטרים (מח"ש)'},
+                  {value: 'מחלקת פניות ציבור', display: 'מחלקת פניות ציבור במשטרה' },
+                  ],
+      },
+
+      {value: 1,
+       display: 'מאבטח/ת',
+       displayValue: 'מאבט/ת',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+      },
+
+      {value: 2,
+       display: 'עובד/ת רשות ציבורית',
+       displayValue: 'עובד/ת רשות ציבורית',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+      },
+
+      {value: 3,
+       display: 'עובד/ת רשות מקומית',
+       displayValue: 'עובד/ת רשות מקומית',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+      },
+
+      {value: 4,
+       display: 'איש/אשת מקצוע',
+       displayValue: 'איש/אשת מקצוע',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+      },
+
+      {value: 5,
+       display: 'עסק',
+       displayValue: 'עסק',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+      },
+
+      {value: 6,
+       display: 'אדם פרטי',
+       displayValue: 'אדם פרטי',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+      },
+
+      {value: 7,
+       display: 'other',
+       displayValue: 'אחר',
+       complaints: null,
+       services: null,
+       relevant_recipients: null,
+     }
+];
+
 function openCallTime() {
         const m_names = ['ינואר', 'פברואר', 'מרץ',
                         'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר',
@@ -102,83 +180,6 @@ export class AppComponent implements OnInit {
     hubspotContact.agent_link = `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
     await this.hubspot.updateUser(hubspotContact);
 
-    const offenders =
-      [
-            {value: 0,
-            display: 'משטרה',
-            displayValue: 'משטרה',
-            complaints: [
-                      {value: 'התנהגות או התבטאות גזענית מצד שוטר/ת',
-                        display: 'התנהגות או התבטאות גזענית מצד שוטר/ת'},
-                      {value: 'פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה',
-                        display: 'פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה'},
-                      {value: 'אחר',
-                        display: 'אחר'},
-                    ],
-            services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
-                    {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
-                      ],
-            relevant_recipients: [ {value: 'מח"ש', display: 'מחלקת חקירות שוטרים (מח"ש)'},
-                        {value: 'מחלקת פניות ציבור', display: 'מחלקת פניות ציבור במשטרה' },
-                        ],
-            },
-
-            {value: 1,
-             display: 'מאבטח/ת',
-             displayValue: 'מאבט/ת',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-            },
-
-            {value: 2,
-             display: 'עובד/ת רשות ציבורית',
-             displayValue: 'עובד/ת רשות ציבורית',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-            },
-
-            {value: 3,
-             display: 'עובד/ת רשות מקומית',
-             displayValue: 'עובד/ת רשות מקומית',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-            },
-
-            {value: 4,
-             display: 'איש/אשת מקצוע',
-             displayValue: 'איש/אשת מקצוע',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-            },
-
-            {value: 5,
-             display: 'עסק',
-             displayValue: 'עסק',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-            },
-
-            {value: 6,
-             display: 'אדם פרטי',
-             displayValue: 'אדם פרטי',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-            },
-
-            {value: 7,
-             display: 'other',
-             displayValue: 'אחר',
-             complaints: null,
-             services: null,
-             relevant_recipients: null,
-           }
-      ];
 
 
     this.content.addOptions(
@@ -187,6 +188,8 @@ export class AppComponent implements OnInit {
     );
 
     const offenderIndex = await this.content.waitForInput();
+    hubspotContact.offender_code = offenderIndex;
+    hubspotContact.offender = offenders[offenderIndex].displayValue;
 
     this.content.addOptions(                                         // choose service type
       'איזו עזרה או סיוע תרצו לקבל מאיתנו?',
@@ -194,6 +197,7 @@ export class AppComponent implements OnInit {
       );
 
     const requiredService = await this.content.waitForInput();
+    hubspotContact.required_service = requiredService;
 
     this.content.addOptions(
         'מהו סוג האירוע עליו תרצו לדווח או להתייעץ?',
@@ -201,12 +205,17 @@ export class AppComponent implements OnInit {
     );
 
     const complaintType = await this.content.waitForInput();
+    hubspotContact.complaint_type = complaintType;
 
     this.content.setTextArea();
     this.content.addTo('תאר/י בבקשה בקצרה את הארוע:');         // ask for event detailed description
     const story = await this.content.waitForInput();
+    hubspotContact.story = story;
 
+    console.log('story', story);
     // validate there was an input
+    await this.hubspot.updateUser(hubspotContact);
+    console.log('updated');
 
     let moreResourcesUpload = true;
 
