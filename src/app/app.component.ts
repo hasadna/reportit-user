@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentService } from 'hatool';
 import { HubspotService } from './hubspot.service';
+import { FileUploader } from 'hatool';
 
 const offenders =
 [
@@ -108,6 +109,10 @@ export class AppComponent implements OnInit {
               private hubspot: HubspotService) {}
 
   ngOnInit() {
+    this.content.sendButtonText = 'שלח/י';
+    this.content.uploadFileText = 'לחצ/י לבחירת קובץ';
+    this.content.uploadedFileText = 'קובץ הועלה בהצלחה';
+    this.content.notUploadedFileText = 'תקלה בהעלאת קובץ';
     this.doIt();
   }
 
@@ -218,6 +223,7 @@ export class AppComponent implements OnInit {
     console.log('updated');
 
     let moreResourcesUpload = true;
+    let resourceIndex = 1;
 
     this.content.addOptions(                                   // upload first resource check
       'האם יש בידיך צילומים, מסמכים או תיעוד של המקרה שתוכל/י להעביר כעת?',
@@ -227,10 +233,19 @@ export class AppComponent implements OnInit {
       ]);
 
     moreResourcesUpload = await this.content.waitForInput();        // upload more resources loop
-    while (moreResourcesUpload) {
+    while (moreResourcesUpload && resourceIndex <= 5) {
 
-      this.content.addTo('[כאן יופיע מנגנון להעלאת קבצים]');
-      // replace with file/resource uploading mechanism + uploading process indication
+      this.content.addUploader('אנא בחר/י את הקובץ הרלוונטי');
+      const file: FileUploader = await this.content.waitForInput();
+      file.active = true;
+      const uploaded = await this.hubspot.uploadFile(
+          file.selectedFile, this.hubspot.vid + '/file-' + resourceIndex,
+          (progress) => { file.progress = progress; },
+          (success) => { file.success = success; }
+      );
+      console.log('UPLOADED', uploaded);
+      hubspotContact['file' + resourceIndex] = uploaded;
+      this.hubspot.updateUser(hubspotContact);
 
       this.content.addTo('מה יש בקובץ ששלחתם?');
 
@@ -244,6 +259,7 @@ export class AppComponent implements OnInit {
         ]);
 
       moreResourcesUpload = await this.content.waitForInput();
+      resourceIndex += 1;
     }
 
     this.content.addTo('תודה לך שפנית אלינו. אנחנו נעבור על כל המידע והחומר ששלחת לנו ונחזור אליך תוך X ימים.');
