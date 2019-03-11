@@ -19,6 +19,7 @@ const offenders =
       services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
               {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
                 ],
+      askForEventDescription: 'תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):',
       relevant_recipients: [ {value: 'מח"ש', display: 'מחלקת חקירות שוטרים (מח"ש)'},
                   {value: 'מחלקת פניות ציבור', display: 'מחלקת פניות ציבור במשטרה' },
                   ],
@@ -26,13 +27,115 @@ const offenders =
 
       {value: 1,
        display: 'מאבטח/ת',
-       displayValue: 'מאבט/ת',
-       complaints: null,
-       services: null,
+       displayValue: 'מאבטח/ת',
+       complaints: [
+            {value: 'בידוק מפלה',
+             display: 'בידוק מפלה'},
+            {value: 'אמירות גזעניות',
+             display: 'אמירות גזעניות'},
+            {value: 'מניעת כניסה',
+             display: 'מניעת כניסה'},
+            {value: 'אחר',
+             display: 'אחר'}
+           ],
+       services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
+                   {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
+                 ],
+       askForEventDescription: 'תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך)',
        relevant_recipients: null,
+       askForOffenderDetails: [
+         {
+           question: 'האם ידוע לך שמה של חברת האבטחה?',
+           answers: [{
+                      value: false,
+                      display: 'לא'
+                      },
+                      {
+                       display: 'כן',
+
+                       value: [{
+                         question: 'מהו שם חברת האבטחה?',
+                         question_key: 'חברת אבטחה'
+                       }]
+                      }
+                ]
+        },
+
+        {
+          question: 'האם ידוע לך השם של המאבטח/ת?',
+          answers: [{ value: false,
+                      display: 'לא'
+                    },
+                     {
+                      display: 'כן',
+                      value:
+                      [{
+                        question: 'מה השם של המאבטח/ת?',
+                        question_key: 'שם המאבטח/ת'
+                      }]
+                    }
+                ]
+          }
+       ],
+
+     askForEventLocation: [{
+         question: 'היכן התרחש האירוע?',
+         answers: [
+           {value: 'קניון', display: 'קניון'},
+           {value: 'משרד ממשלתי', display: 'משרד ממשלתי (כגון משרד הפנים, הביטוח הלאומי וכו...'},
+           {value: 'תחבורה ציבורית', display: 'תחבורה ציבורית (כגון אוטובוס, רכבת, תחנה מרכזית)'},
+           {value: 'בית חולים', display: 'בית חולים'},
+           {value: 'מועדון', display: 'מועדון'},
+           {value: 'נתב"ג', display: 'נתב"ג'},
+           {display: 'אחר', value:
+            [{
+              question: 'היכן התרחש הארוע?',
+              question_key: ''
+            }]}
+         ]
+       }]
+
+      },
+      {value: 2,
+       display: 'תחום המגורים',
+       displayValue: 'גורם  בתחום המגורים/דיור',
+       complaints: [
+            {value: 'קבלה לישוב',
+             display: 'הפליה בקבלה לישוב',
+             followUp: [
+               {question: 'מהו סוג הישוב שקשור לאירוע?',
+                answers: [
+                        {value: 'ישוב קהילתי',
+                         display: 'ישוב קהילתי'},
+                        {value: 'שכונת הרחבה במושב או בקיבוץ',
+                          display: 'שכונת הרחבה במושב או בקיבוץ'
+                        },
+                        {value: 'נחלה בקיבוץ או במושב',
+                         display: 'נחלה בקיבוץ או במושב'
+                        }
+                    ]
+              }],
+            },
+            {value: 'הפליה במכירת דירה',
+             display: 'מכירת דירה על ידי חברת בניה/יזם/קבלן'},
+            {value: 'הפליה בהשכרת דירה מחברה',
+             display: 'הפליה בהשכרת דירה מחברה'
+            },
+            {value: 'הפליה בהשכרת דירה מאדם פרטי',
+             display: 'הפליה בהשכרת דירה מאדם פרטי',
+            },
+            {value: 'אחר',
+             display: 'אחר'}
+           ],
+
+       services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
+                     {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
+                   ],
+       relevant_recipients: null,
+       askForEventDescription: 'אנא תאר/י את המקרה, עם כמה שיותר פרטים'
       },
 
-      {value: 2,
+      {value: 3,
        display: 'עובד/ת רשות ציבורית',
        displayValue: 'עובד/ת רשות ציבורית',
        complaints: null,
@@ -40,7 +143,7 @@ const offenders =
        relevant_recipients: null,
       },
 
-      {value: 3,
+      {value: 4,
        display: 'עובד/ת רשות מקומית',
        displayValue: 'עובד/ת רשות מקומית',
        complaints: null,
@@ -48,7 +151,7 @@ const offenders =
        relevant_recipients: null,
       },
 
-      {value: 4,
+      {value: 5,
        display: 'איש/אשת מקצוע',
        displayValue: 'איש/אשת מקצוע',
        complaints: null,
@@ -56,7 +159,7 @@ const offenders =
        relevant_recipients: null,
       },
 
-      {value: 5,
+      {value: 6,
        display: 'עסק',
        displayValue: 'עסק',
        complaints: null,
@@ -64,7 +167,7 @@ const offenders =
        relevant_recipients: null,
       },
 
-      {value: 6,
+      {value: 7,
        display: 'אדם פרטי',
        displayValue: 'אדם פרטי',
        complaints: null,
@@ -72,7 +175,7 @@ const offenders =
        relevant_recipients: null,
       },
 
-      {value: 7,
+      {value: 8,
        display: 'other',
        displayValue: 'אחר',
        complaints: null,
@@ -102,6 +205,7 @@ function openCallTime() {
   template: '<htl-hatool></htl-hatool>',
   styleUrls: ['./app.component.less']
 })
+
 export class AppComponent implements OnInit {
   title = 'hatool';
 
@@ -127,10 +231,11 @@ export class AppComponent implements OnInit {
     if (['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי'].indexOf(startTime.dayName) >= 0) {
       this.content.addTo('לפני שנעביר את הפניה שלך לכונן, נבקש ממך לענות על כמה שאלות, שיסייעו לנו להשיב במהירות.');
       } else {
-      this.content.addTo('.הכוננים שלנו עובדים בימים א-ה בשעות 9:00 עד 17:00.' +
+      this.content.addTo('המוקדנים שלנו עובדים בימים א-ה בשעות 9:00 עד 17:00.' +
                          ' כדי שנוכל לחזור אליך במהירות נבקש ממך לענות לנו על כמה שאלות');
       }
-    this.content.addTo('כדי שנוכל לטפל בפניה אנו זקוקים לפרטי התקשרות. לא ייעשה בפרטים אלו כל שימוש זולת טיפול בתלונה.');
+    this.content.addTo('כדי שנוכל לטפל בפניה אנו זקוקים לפרטי התקשרות.\
+     לא ייעשה בפרטים אלו כל שימוש חוץ מטיפול בתלונה בדרך שבה תאשר/י לנו.');
     this.content.addTo('מה השם שלך? אם את/ה רוצ/ה להישאר אנונימי/ת בשלב זה כתבו "אנונימי"');
     const name = await this.content.waitForInput();
     hubspotContact.full_name = name;
@@ -148,7 +253,7 @@ export class AppComponent implements OnInit {
           [
             {value: 'phone', display: 'טלפון'},
             {value: 'email', display: 'דוא"ל'},
-            {value: 'mobilephone', display: 'וואטסאפ'},
+            {value: 'whatsapp', display: 'וואטסאפ'},
             {value: 'facebook', display: 'facebook messenger'},
           ]);
 
@@ -157,7 +262,7 @@ export class AppComponent implements OnInit {
       const contactDetailsOptions = {        // question and regex validator for user's detailed contact method
         'phone': {question: 'מה מספר הטלפון שלך?', validator: null},
         'email': {question: 'מה כתובת האימייל שלך?', validator: null},
-        'mobilephone': {question: 'מה מספר הוואטסאפ או שם המשתמש/ת שלך?', validator: null},
+        'whatsapp': {question: 'מה מספר הוואטסאפ או שם המשתמש/ת שלך?', validator: null},
         'facebook': {question: 'מה שם החשבון שלך?', validator: null},
       };
 
@@ -181,20 +286,112 @@ export class AppComponent implements OnInit {
       this.content.addFrom(askForContacts ? 'כן' : 'לא');
     }
 
-    const vid = await this.hubspot.createUser(hubspotContact);
+    const vid = await this.hubspot.createUser(hubspotContact);         // * check how to update CRM during the contact details loop
     hubspotContact.agent_link = `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
     await this.hubspot.updateUser(hubspotContact);
-
-
+    console.log('updated vid');
 
     this.content.addOptions(
-      'מי נהג כלפיך בגזענות או באופן מפלה?',
+      ' או לאיזה תחום קשור האירוע? מי נהג כלפיך בגזענות או באופן מפלה?',
       offenders
     );
+    await this.hubspot.updateUser(hubspotContact);
 
     const offenderIndex = await this.content.waitForInput();
+    const offenderObject = offenders[offenderIndex];   // create an offender object for the rest of the script
     hubspotContact.offender_code = offenderIndex;
-    hubspotContact.offender = offenders[offenderIndex].displayValue;
+    hubspotContact.offender = offenderObject.displayValue;
+    await this.hubspot.updateUser(hubspotContact);
+    console.log(`updated offender: ${hubspotContact.offender}`);
+
+
+    this.content.addOptions(                                          // choose complaint type
+        'מהו סוג האירוע עליו תרצו לדווח או להתייעץ?',
+        offenderObject.complaints
+    );
+
+    const complaintType = await this.content.waitForInput();
+    hubspotContact.complaint_type = complaintType;
+    await this.hubspot.updateUser(hubspotContact);
+    console.log('updated complaint type');
+
+
+
+    if ('askForOffenderDetails' in offenderObject) {                            // check if we should ask optional offender details quetsion
+      let answers;
+      const offenderDetails = [];
+      const offenderDetailsQuestions = offenderObject.askForOffenderDetails;
+      for (let questionIndex = 0; questionIndex <= offenderDetailsQuestions.length - 1; questionIndex++) {
+
+        const questionObject = offenderDetailsQuestions[questionIndex];
+        const question = questionObject.question;
+
+        if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+          this.content.addOptions(question,  questionObject.answers);
+          } else {
+          this.content.addTo(question);
+        }
+        const answer = await this.content.waitForInput();
+
+        if (typeof answer === 'object') {                                        // check if we need to handle a follow-up question
+          const followUpQuestions = answer;
+          for (let followUpQuestionIndex = 0; followUpQuestionIndex <= followUpQuestions.length - 1; followUpQuestionIndex++) {
+            const newQuestion = followUpQuestions[followUpQuestionIndex].question;
+            const question_key = followUpQuestions[followUpQuestionIndex].question_key;
+
+            this.content.addTo(newQuestion);
+            const newAnswer = await this.content.waitForInput();
+            offenderDetails.push({'key': question_key, 'detail': newAnswer});
+
+          }
+          answers = offenderDetails.map(e => (e.key + ': ' + e.detail)).join(', ');
+        } else {
+          answers = answer;
+        }
+      }
+      hubspotContact.offender_person_details = answers;
+      await this.hubspot.updateUser(hubspotContact);
+      console.log('updated offender_person_details');
+    }
+
+
+    if ('askForEventLocation' in offenderObject) {     // check if/how we should ask for the event location
+      const locationDetails = [];
+      let answers;
+      const locationDetailsQuestions = offenderObject.askForEventLocation;
+      for (let questionIndex = 0; questionIndex <= locationDetailsQuestions.length - 1; questionIndex++) {
+
+        const questionObject = locationDetailsQuestions[questionIndex];
+        const question = questionObject.question;
+
+        if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+          this.content.addOptions(question,  questionObject.answers);
+          } else {
+          this.content.addTo(question);
+        }
+        const answer = await this.content.waitForInput();
+
+        if (typeof answer === 'object') {                                        // check if we need to handle a follow-up question
+          const followUpQuestions = answer;
+          for (let followUpQuestionIndex = 0; followUpQuestionIndex <= followUpQuestions.length - 1; followUpQuestionIndex++) {
+              const newQuestion = followUpQuestions[followUpQuestionIndex].question;
+              const question_key = followUpQuestions[followUpQuestionIndex].question_key;
+
+              this.content.addTo(newQuestion);
+              const newAnswer = await this.content.waitForInput();
+              locationDetails.push({'key': question_key, 'detail': newAnswer});
+            }
+
+        answers = locationDetails.map(e => (e.key + ': ' + e.detail)).join(', ');
+      } else {
+        answers = answer;
+        }
+        }
+
+        hubspotContact.event_location = answers;
+        await this.hubspot.updateUser(hubspotContact);
+        console.log('updated event_location');
+      }
 
     this.content.addOptions(                                         // choose service type
       'איזו עזרה או סיוע תרצו לקבל מאיתנו?',
@@ -203,24 +400,19 @@ export class AppComponent implements OnInit {
 
     const requiredService = await this.content.waitForInput();
     hubspotContact.required_service = requiredService;
-
-    this.content.addOptions(
-        'מהו סוג האירוע עליו תרצו לדווח או להתייעץ?',
-        offenders[offenderIndex].complaints
-    );
-
-    const complaintType = await this.content.waitForInput();
-    hubspotContact.complaint_type = complaintType;
+    await this.hubspot.updateUser(hubspotContact);
+    console.log('updated required_service');
 
     this.content.setTextArea();
-    this.content.addTo('תאר/י בבקשה בקצרה את הארוע:');         // ask for event detailed description
-    const story = await this.content.waitForInput();
-    hubspotContact.story = story;
+    this.content.addTo(offenderObject.askForEventDescription);         // ask for event detailed description
+    const event_description = await this.content.waitForInput();
+    hubspotContact.event_description = event_description;
 
-    console.log('story', story);
+    console.log('event_description', event_description);
     // validate there was an input
     await this.hubspot.updateUser(hubspotContact);
-    console.log('updated');
+    console.log('updated event_description');
+
 
     let moreResourcesUpload = true;
     let resourceIndex = 1;
@@ -233,7 +425,7 @@ export class AppComponent implements OnInit {
       ]);
 
     moreResourcesUpload = await this.content.waitForInput();        // upload more resources loop
-    while (moreResourcesUpload && resourceIndex <= 5) {
+    while (moreResourcesUpload && resourceIndex <= 5) {                       // uploaded files limit, following the CRM fields settings
 
       this.content.addUploader('אנא בחר/י את הקובץ הרלוונטי');
       const file: FileUploader = await this.content.waitForInput();
@@ -245,11 +437,12 @@ export class AppComponent implements OnInit {
       );
       console.log('UPLOADED', uploaded);
       hubspotContact['file' + resourceIndex] = uploaded;
-      this.hubspot.updateUser(hubspotContact);
 
       this.content.addTo('מה יש בקובץ ששלחתם?');
 
       const resouceDescription = await this.content.waitForInput();
+      hubspotContact['file' + resourceIndex + 'description'] = resouceDescription;
+      this.hubspot.updateUser(hubspotContact);
 
       this.content.addOptions(
         'האם יש בידיך עוד צילומים, מסמכים או תיעוד של המקרה שתוכל/י להעביר לנו כעת?',
@@ -262,7 +455,10 @@ export class AppComponent implements OnInit {
       resourceIndex += 1;
     }
 
-    this.content.addTo('תודה לך שפנית אלינו. אנחנו נעבור על כל המידע והחומר ששלחת לנו ונחזור אליך תוך X ימים.');
+    this.content.addTo('תודה לך שפנית אלינו.\
+     אנחנו נעבור על כל המידע והחומר ששלחת לנו ונחזור אליך תוך X ימים.');
+
+     // * we should tell the users how (which platform(s)) we will reach them
 
   }
 
