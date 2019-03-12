@@ -100,11 +100,13 @@ const offenders =
        display: 'תחום המגורים',
        displayValue: 'גורם  בתחום המגורים/דיור',
        complaints: [
-            {value: 'קבלה לישוב',
+            {
              display: 'הפליה בקבלה לישוב',
-             followUp: [
-               {question: 'מהו סוג הישוב שקשור לאירוע?',
-                answers: [
+             value: {
+               value: 'קבלה לישוב',
+               followUp: [
+                 {question: 'מהו סוג הישוב שקשור לאירוע?',
+                 answers: [
                         {value: 'ישוב קהילתי',
                          display: 'ישוב קהילתי'},
                         {value: 'שכונת הרחבה במושב או בקיבוץ',
@@ -113,8 +115,9 @@ const offenders =
                         {value: 'נחלה בקיבוץ או במושב',
                          display: 'נחלה בקיבוץ או במושב'
                         }
-                    ]
-              }],
+                        ]
+                      }],
+                    }
             },
             {value: 'הפליה במכירת דירה',
              display: 'מכירת דירה על ידי חברת בניה/יזם/קבלן'},
@@ -128,6 +131,7 @@ const offenders =
              display: 'אחר'}
            ],
 
+       askForEventLocation: [ {question: 'היכן התרחש האירוע?', answers: null}],
        services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
                      {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
                    ],
@@ -310,8 +314,30 @@ export class AppComponent implements OnInit {
         offenderObject.complaints
     );
 
-    const complaintType = await this.content.waitForInput();
-    hubspotContact.complaint_type = complaintType;
+    const complaintType = await this.content.waitForInput();            // check if complaint type consist specific follow-up questions
+    let copmlaintDescription;
+    if (typeof(complaintType) === 'object' && 'followUp' in complaintType) {
+            // in case of follow up questions ask and combine all answers into a string
+        const complaintFollowUpQuestions = complaintType.followUp;
+        const followUpAnswers = [];
+        for (let followUpQuestionIndex = 0; followUpQuestionIndex <= complaintFollowUpQuestions.length - 1; followUpQuestionIndex++) {
+          const questionObject = complaintFollowUpQuestions[followUpQuestionIndex];
+          const newQuestion = questionObject.question;
+          const question_key = questionObject.question_key;
+
+          if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+            this.content.addOptions(newQuestion,  questionObject.answers);
+            } else {
+            this.content.addTo(newQuestion);
+          }
+          const newAnswer = await this.content.waitForInput();
+          followUpAnswers.push({'key': question_key, 'detail': newAnswer});
+        }
+        copmlaintDescription = complaintType.value + ', ' + followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
+      } else {                                                     // if there are no follow up questions, just save the string
+          copmlaintDescription = complaintType;
+          }
+    hubspotContact.complaint_type = copmlaintDescription;
     await this.hubspot.updateUser(hubspotContact);
     console.log('updated complaint type');
 
@@ -364,7 +390,7 @@ export class AppComponent implements OnInit {
         const questionObject = locationDetailsQuestions[questionIndex];
         const question = questionObject.question;
 
-        if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+        if ('answers' in questionObject && questionObject.answers != null) {  // what is the type of the question: options / open question
           this.content.addOptions(question,  questionObject.answers);
           } else {
           this.content.addTo(question);
