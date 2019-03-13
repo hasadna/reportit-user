@@ -20,9 +20,6 @@ const offenders =
               {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
                 ],
       askForEventDescription: 'תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):',
-      relevant_recipients: [ {value: 'מח"ש', display: 'מחלקת חקירות שוטרים (מח"ש)'},
-                  {value: 'מחלקת פניות ציבור', display: 'מחלקת פניות ציבור במשטרה' },
-                  ],
       },
 
       {value: 1,
@@ -42,7 +39,6 @@ const offenders =
                    {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
                  ],
        askForEventDescription: 'תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך)',
-       relevant_recipients: null,
        askForOffenderDetails: [
          {
            question: 'האם ידוע לך שמה של חברת האבטחה?',
@@ -135,7 +131,6 @@ const offenders =
        services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
                      {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
                    ],
-       relevant_recipients: null,
        askForEventDescription: 'אנא תאר/י את המקרה, עם כמה שיותר פרטים'
       },
 
@@ -144,7 +139,6 @@ const offenders =
        displayValue: 'עובד/ת רשות ציבורית',
        complaints: null,
        services: null,
-       relevant_recipients: null,
       },
 
       {value: 4,
@@ -152,7 +146,6 @@ const offenders =
        displayValue: 'עובד/ת רשות מקומית',
        complaints: null,
        services: null,
-       relevant_recipients: null,
       },
 
       {value: 5,
@@ -160,7 +153,6 @@ const offenders =
        displayValue: 'איש/אשת מקצוע',
        complaints: null,
        services: null,
-       relevant_recipients: null,
       },
 
       {value: 6,
@@ -168,7 +160,6 @@ const offenders =
        displayValue: 'עסק',
        complaints: null,
        services: null,
-       relevant_recipients: null,
       },
 
       {value: 7,
@@ -176,7 +167,6 @@ const offenders =
        displayValue: 'אדם פרטי',
        complaints: null,
        services: null,
-       relevant_recipients: null,
       },
 
       {value: 8,
@@ -184,7 +174,6 @@ const offenders =
        displayValue: 'אחר',
        complaints: null,
        services: null,
-       relevant_recipients: null,
      }
 ];
 
