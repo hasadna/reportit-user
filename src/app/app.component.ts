@@ -473,6 +473,7 @@ export class AppComponent implements OnInit {
     this.content.addTo('תודה לך שפנית אלינו.\
      אנחנו נעבור על כל המידע והחומר ששלחת לנו ונחזור אליך תוך X ימים.');
 
+    this.content.addTo(`לצורכי QA בלבד: <a href="http://hasadna.github.io/reportit-agent/?vid=${vid}" target="_blank"}>קישור לבדיקה</a>`);
      // * we should tell the users how (which platform(s)) we will reach them
 
   }
