@@ -371,10 +371,8 @@ const offenders =
        services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
                {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
              ],
-      },
-
-
-      {value: 4,
+      }];
+/*      {value: 4,
        display: 'עובד/ת רשות ציבורית',
        displayValue: 'עובד/ת רשות ציבורית',
        complaints: null,
@@ -414,8 +412,7 @@ const offenders =
        displayValue: 'אחר',
        complaints: null,
        services: null,
-     }
-];
+*/
 
 function openCallTime() {
         const m_names = ['ינואר', 'פברואר', 'מרץ',
