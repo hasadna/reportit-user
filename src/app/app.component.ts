@@ -210,7 +210,7 @@ const offenders =
                   question_key: 'שם הגן'
                 },
                 {
-                  question: 'באיזו מסגרת פועל בית הספר?',
+                  question: 'באיזו מסגרת פועל הגן?',
                   question_key: 'סוג המסגרת החינוכית',
                   answers: [
                     {
@@ -250,7 +250,7 @@ const offenders =
                   question_key: 'שם הגן'
               },
               {
-                question: 'באיזו מסגרת פועל בית הספר?',
+                question: 'באיזו מסגרת פועל  הגן?',
                 question_key: 'סוג המסגרת החינוכית',
                 answers: [
                   {
@@ -290,7 +290,7 @@ const offenders =
                   question_key: 'שם הגן'
                 },
                 {
-                  question: 'באיזו מסגרת פועל בית הספר?',
+                  question: 'באיזו מסגרת פועל הגן?',
                   question_key: 'סוג המסגרת החינוכית',
                   answers: [
                     {
@@ -344,12 +344,30 @@ const offenders =
                },
              ]
            }
-         },
-
-         ]
-       },
+         }
+       ]
+     },
        askForEventLocation: [ {question: 'מה כתובת או מיקום הארוע? (אם לא ידוע, כתבו "לא ידוע")', answers: null}],
-       askForEventDescription: 'תארו את האירוע',
+       askForEventDescription: [
+         {
+           question: 'על איזה רקע, לדעתך, הופלית או נהגו כלפיך בגזענות?',
+           question_key: 'אפליה על רקע',
+           answers: [
+             {value: 'מוצא, עדה או לאום, או צבע עור', display: 'מוצא, עדה או לאום, או צבע עור'},
+             {value: 'דת', display: 'דת'},
+             {value: 'מין, נטייה מינית או זהות מגדרית', display: 'מין, נטייה מינית או זהות מגדרית'},
+             {display: 'אחר', value:
+              [{
+                question: 'על איזה רקע התרחשו האירוע או ההפליה?',
+                question_key: ''
+              }]}
+           ]
+         },
+         {
+           question: 'תארו את האירוע',
+          question_key: 'תיאור נוסף'
+          }
+        ],
        services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
                {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
              ],
@@ -642,34 +660,33 @@ export class AppComponent implements OnInit {
     await this.hubspot.updateUser(hubspotContact);
     console.log('updated required_service');
 
-    this.content.setTextArea();
-
     if ('askForEventDescription' in offenderObject) {
       const eventDescriptionQuestions: any = offenderObject.askForEventDescription;
 
-      if (typeof(eventDescriptionQuestions) === 'object' && 'followUp' in eventDescriptionQuestions) {
+      if (typeof(eventDescriptionQuestions) === 'object') {
             // in case of follow up questions ask and combine all answers into a string
-            const descriptionFollowUpQuestions = eventDescriptionQuestions.followUp;
-        const followUpAnswers = [];
-        for (let followUpQuestionIndex = 0; followUpQuestionIndex <= descriptionFollowUpQuestions.length - 1; followUpQuestionIndex++) {
-          const questionObject = descriptionFollowUpQuestions[followUpQuestionIndex];
-          const newQuestion = questionObject.question;
-          const question_key = questionObject.question_key;
+            const followUpAnswers = [];
+            console.log(eventDescriptionQuestions);
+            for (let followUpQuestionIndex = 0; followUpQuestionIndex <= eventDescriptionQuestions.length - 1; followUpQuestionIndex++) {
+              const questionObject = eventDescriptionQuestions[followUpQuestionIndex];
+              const newQuestion = questionObject.question;
+              const question_key = questionObject.question_key;
 
-          if ('answers' in questionObject) {                               // what is the type of the question: options / open question
-            this.content.addOptions(newQuestion,  questionObject.answers);
-            } else {
-            this.content.addTo(newQuestion);
-          }
-          const newAnswer = await this.content.waitForInput();
-          followUpAnswers.push({'key': question_key, 'detail': newAnswer});
-        }
-        copmlaintDescription = complaintType.value + ', ' + followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
-      } else {
-                                                             // if there are no follow up questions, just save the string
-          this.content.addTo(eventDescriptionQuestions);
-          const newAnswer = await this.content.waitForInput();
-          copmlaintDescription = complaintType.value + `, ` + newAnswer;
+              if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+                this.content.addOptions(newQuestion,  questionObject.answers);
+              } else {
+                this.content.addTo(newQuestion);
+              }
+              const newAnswer = await this.content.waitForInput();
+              followUpAnswers.push({'key': question_key, 'detail': newAnswer});
+            }
+            copmlaintDescription = complaintType.value + ', ' + followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
+
+          } else {
+                                                             // if there is a single (non-object) question, just save the string
+            this.content.addTo(eventDescriptionQuestions);
+            const newAnswer = await this.content.waitForInput();
+            copmlaintDescription = complaintType.value + `, ` + newAnswer;
           }
         hubspotContact.event_description = copmlaintDescription;
 
