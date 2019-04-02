@@ -8,24 +8,30 @@ const offenders =
       {value: 0,
       display: 'משטרה',
       displayValue: 'משטרה',
-      complaints: [
+      complaints: {
+            question: 'מהו סוג האירוע עליו תרצו לדווח?',
+            options:
+              [
                 {value: 'התנהגות או התבטאות גזענית מצד שוטר/ת',
                   display: 'התנהגות או התבטאות גזענית מצד שוטר/ת'},
                 {value: 'פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה',
                   display: 'פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה'},
                 {value: 'אחר',
                   display: 'אחר'},
-              ],
+              ]
+            },
       services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
               {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
-                ],
+            ],
       askForEventDescription: 'תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):',
       },
 
       {value: 1,
        display: 'מאבטח/ת',
        displayValue: 'מאבטח/ת',
-       complaints: [
+       complaints: {
+         question: 'מהו סוג האירוע עליו תרצו לדווח?',
+         options: [
             {value: 'בידוק מפלה',
              display: 'בידוק מפלה'},
             {value: 'אמירות גזעניות',
@@ -34,10 +40,11 @@ const offenders =
              display: 'מניעת כניסה'},
             {value: 'אחר',
              display: 'אחר'}
-           ],
-       services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
-                   {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
-                 ],
+           ]
+         },
+        services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
+                    {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
+                  ],
        askForEventDescription: 'תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך)',
        askForOffenderDetails: [
          {
@@ -90,12 +97,13 @@ const offenders =
             }]}
          ]
        }]
-
       },
       {value: 2,
-       display: 'תחום המגורים',
+       display: 'גורם  בתחום המגורים/דיור',
        displayValue: 'גורם  בתחום המגורים/דיור',
-       complaints: [
+       complaints: {
+          question: 'מהו סוג האירוע עליו תרצו לדווח?',
+          options: [
             {
              display: 'הפליה בקבלה לישוב',
              value: {
@@ -125,7 +133,8 @@ const offenders =
             },
             {value: 'אחר',
              display: 'אחר'}
-           ],
+           ]
+         },
 
        askForEventLocation: [ {question: 'היכן התרחש האירוע?', answers: null}],
        services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
@@ -135,41 +144,254 @@ const offenders =
       },
 
       {value: 3,
+       display: 'מסגרת חינוכית',
+       displayValue: 'מסגרת חינוכית',
+       complaints: {
+         question: 'באיזו מסגרת חינוכית מדובר?',
+         options: [
+           {display: 'אוניברסיטה/מכללה',
+           value: {
+            value: 'אוניברסיטה/מכללה',
+            followUp: [
+              {
+                question: 'מהו שם המוסד (האוניברסיטה או המכללה)?',
+                question_key: 'שם המוסד האקדמי'
+              }
+            ]
+          }
+        },
+
+           {display: 'בית ספר',
+            value: {
+              value: 'בית ספר',
+              followUp: [
+                {
+                  question: 'מהו שם בית הספר?',
+                  question_key: 'שם בית הספר'
+                },
+
+                {
+                  question: 'באיזו מסגרת פועל בית הספר?',
+                  question_key: 'סוג המסגרת החינוכית',
+                  answers: [
+                    {
+                      display: 'חינוך ממלכתי',
+                      value: 'חינוך ממלכתי'
+                    },
+                    {
+                      display: 'חינוך ממלכתי דתי',
+                      value: 'חינוך ממלכתי דתי',
+                    },
+                    {
+                      display: 'חינוך חרדי',
+                      value: 'חינוך חרדי'
+                    },
+                    {
+                      display: 'חינוך מיוחד',
+                      value: 'חינוך מיוחד'
+                    },
+                    {
+                      display: 'אחר',
+                      value: 'אחר'
+                    }
+                  ]
+                }
+              ]
+            }
+         },
+
+           {
+            display: 'גן חובה',
+            value: {
+              value: 'גן חובה',
+              followUp: [
+                {
+                  question: 'מהו שם הגן?',
+                  question_key: 'שם הגן'
+                },
+                {
+                  question: 'באיזו מסגרת פועל בית הספר?',
+                  question_key: 'סוג המסגרת החינוכית',
+                  answers: [
+                    {
+                      display: 'חינוך ממלכתי',
+                      value: 'חינוך ממלכתי'
+                    },
+                    {
+                      display: 'חינוך ממלכתי דתי',
+                      value: 'חינוך ממלכתי דתי',
+                    },
+                    {
+                      display: 'חינוך חרדי',
+                      value: 'חינוך חרדי'
+                    },
+                    {
+                      display: 'חינוך מיוחד',
+                      value: 'חינוך מיוחד'
+                    },
+                    {
+                      display: 'אחר',
+                      value: 'אחר'
+                    }
+                  ]
+                }
+
+              ]
+            },
+          },
+
+          {
+            display: 'גן טרום חובה',
+            value: {
+              value: 'גן טרום חובה',
+              followUp: [
+                {
+                  question: 'מהו שם הגן?',
+                  question_key: 'שם הגן'
+              },
+              {
+                question: 'באיזו מסגרת פועל בית הספר?',
+                question_key: 'סוג המסגרת החינוכית',
+                answers: [
+                  {
+                    display: 'חינוך ממלכתי',
+                    value: 'חינוך ממלכתי'
+                  },
+                  {
+                    display: 'חינוך ממלכתי דתי',
+                    value: 'חינוך ממלכתי דתי',
+                  },
+                  {
+                    display: 'חינוך חרדי',
+                    value: 'חינוך חרדי'
+                  },
+                  {
+                    display: 'חינוך מיוחד',
+                    value: 'חינוך מיוחד'
+                  },
+                  {
+                    display: 'אחר',
+                    value: 'אחר'
+                  }
+                ]
+              }
+
+            ]
+          }
+        },
+
+        {
+          display: 'טרום טרום חובה',
+          value:
+            { value: 'טרום טרום חובה',
+              followUp: [
+                {
+                  question: 'מהו שם הגן?',
+                  question_key: 'שם הגן'
+                },
+                {
+                  question: 'באיזו מסגרת פועל בית הספר?',
+                  question_key: 'סוג המסגרת החינוכית',
+                  answers: [
+                    {
+                      display: 'חינוך ממלכתי',
+                      value: 'חינוך ממלכתי'
+                    },
+                    {
+                      display: 'חינוך ממלכתי דתי',
+                      value: 'חינוך ממלכתי דתי',
+                    },
+                    {
+                      display: 'חינוך חרדי',
+                      value: 'חינוך חרדי'
+                    },
+                    {
+                      display: 'חינוך מיוחד',
+                      value: 'חינוך מיוחד'
+                    },
+                    {
+                      display: 'אחר',
+                      value: 'אחר'
+                    }
+                  ]
+                }
+
+              ]
+            }
+          },
+
+          {
+            display: 'גן פרטי לגיל הרך',
+            value: {
+                value: 'גן פרטי לגיל הרך',
+                followUp: [
+                  {
+                    question: 'מהו שם הגן?',
+                    question_key: 'שם הגן'
+                  },
+                ]
+              }
+            },
+
+          {
+           display: 'חוגים של רשות מקומית',
+           value: {
+             value: 'חוגים של רשות מקומית',
+             followUp: [
+               {
+                 question: 'מהו שם הגן?',
+                 question_key: 'שם הגן'
+               },
+             ]
+           }
+         },
+
+         ]
+       },
+       askForEventLocation: [ {question: 'מה כתובת או מיקום הארוע? (אם לא ידוע, כתבו "לא ידוע")', answers: null}],
+       askForEventDescription: 'תארו את האירוע',
+       services: [ {value: 'קבלת מידע', display: 'מידע על האפשרויות שעומדות בפניי' },
+               {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
+             ],
+      },
+
+
+      {value: 4,
        display: 'עובד/ת רשות ציבורית',
        displayValue: 'עובד/ת רשות ציבורית',
        complaints: null,
        services: null,
       },
 
-      {value: 4,
+      {value: 5,
        display: 'עובד/ת רשות מקומית',
        displayValue: 'עובד/ת רשות מקומית',
        complaints: null,
        services: null,
       },
 
-      {value: 5,
+      {value: 6,
        display: 'איש/אשת מקצוע',
        displayValue: 'איש/אשת מקצוע',
        complaints: null,
        services: null,
       },
 
-      {value: 6,
+      {value: 7,
        display: 'עסק',
        displayValue: 'עסק',
        complaints: null,
        services: null,
       },
 
-      {value: 7,
+      {value: 8,
        display: 'אדם פרטי',
        displayValue: 'אדם פרטי',
        complaints: null,
        services: null,
       },
 
-      {value: 8,
+      {value: 9,
        display: 'other',
        displayValue: 'אחר',
        complaints: null,
@@ -299,8 +521,8 @@ export class AppComponent implements OnInit {
 
 
     this.content.addOptions(                                          // choose complaint type
-        'מהו סוג האירוע עליו תרצו לדווח או להתייעץ?',
-        offenderObject.complaints
+        offenderObject.complaints.question,
+        offenderObject.complaints.options
     );
 
     const complaintType = await this.content.waitForInput();            // check if complaint type consist specific follow-up questions
@@ -408,10 +630,12 @@ export class AppComponent implements OnInit {
         console.log('updated event_location');
       }
 
+    if ('services' in offenders[offenderIndex]) {
     this.content.addOptions(                                         // choose service type
       'איזו עזרה או סיוע תרצו לקבל מאיתנו?',
       offenders[offenderIndex]['services']
       );
+    }
 
     const requiredService = await this.content.waitForInput();
     hubspotContact.required_service = requiredService;
@@ -419,11 +643,40 @@ export class AppComponent implements OnInit {
     console.log('updated required_service');
 
     this.content.setTextArea();
-    this.content.addTo(offenderObject.askForEventDescription);         // ask for event detailed description
-    const event_description = await this.content.waitForInput();
-    hubspotContact.event_description = event_description;
 
-    console.log('event_description', event_description);
+    if ('askForEventDescription' in offenderObject) {
+      const eventDescriptionQuestions: any = offenderObject.askForEventDescription;
+
+      if (typeof(eventDescriptionQuestions) === 'object' && 'followUp' in eventDescriptionQuestions) {
+            // in case of follow up questions ask and combine all answers into a string
+            const descriptionFollowUpQuestions = eventDescriptionQuestions.followUp;
+        const followUpAnswers = [];
+        for (let followUpQuestionIndex = 0; followUpQuestionIndex <= descriptionFollowUpQuestions.length - 1; followUpQuestionIndex++) {
+          const questionObject = descriptionFollowUpQuestions[followUpQuestionIndex];
+          const newQuestion = questionObject.question;
+          const question_key = questionObject.question_key;
+
+          if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+            this.content.addOptions(newQuestion,  questionObject.answers);
+            } else {
+            this.content.addTo(newQuestion);
+          }
+          const newAnswer = await this.content.waitForInput();
+          followUpAnswers.push({'key': question_key, 'detail': newAnswer});
+        }
+        copmlaintDescription = complaintType.value + ', ' + followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
+      } else {
+                                                             // if there are no follow up questions, just save the string
+          this.content.addTo(eventDescriptionQuestions);
+          const newAnswer = await this.content.waitForInput();
+          copmlaintDescription = complaintType.value + `, ` + newAnswer;
+          }
+        hubspotContact.event_description = copmlaintDescription;
+
+        }
+
+
+    console.log('event_description', copmlaintDescription);
     // validate there was an input
     await this.hubspot.updateUser(hubspotContact);
     console.log('updated event_description');
@@ -471,7 +724,7 @@ export class AppComponent implements OnInit {
     }
 
     this.content.addTo('תודה לך שפנית אלינו.\
-     אנחנו נעבור על כל המידע והחומר ששלחת לנו ונחזור אליך תוך X ימים.');
+     אנחנו נעבור על כל המידע והחומר ששלחת ונחזור אליך תוך 2 ימים.');
      // * we should tell the users how (which platform(s)) we will reach them
 
     this.content.addTo(`לצורכי QA בלבד: \
