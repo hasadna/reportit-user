@@ -433,21 +433,23 @@ function openCallTime() {
 
 @Component({
   selector: 'app-root',
-  template: '<htl-hatool></htl-hatool>',
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
 
 export class AppComponent implements OnInit {
   title = 'hatool';
+  helpVisible = false;
 
   constructor(private content: ContentService,
               private hubspot: HubspotService) {}
 
   ngOnInit() {
-    this.content.sendButtonText = 'שלח/י';
+    this.content.sendButtonText = '';
     this.content.uploadFileText = 'לחצ/י לבחירת קובץ';
     this.content.uploadedFileText = 'קובץ הועלה בהצלחה';
     this.content.notUploadedFileText = 'תקלה בהעלאת קובץ';
+    this.content.inputPlaceholder = 'הקלידו הודעה...';
     this.doIt();
   }
 
