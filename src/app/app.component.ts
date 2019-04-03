@@ -146,223 +146,224 @@ const offenders =
       {value: 3,
        display: 'מסגרת חינוכית',
        displayValue: 'מסגרת חינוכית',
-       complaints: {
-         question: 'באיזו מסגרת חינוכית מדובר?',
-         options: [
-           {display: 'אוניברסיטה/מכללה',
-           value: {
-            value: 'אוניברסיטה/מכללה',
-            followUp: [
-              {
-                question: 'מהו שם המוסד (האוניברסיטה או המכללה)?',
-                question_key: 'שם המוסד האקדמי'
-              }
-            ]
-          }
-        },
-
-           {display: 'בית ספר',
-            value: {
-              value: 'בית ספר',
-              followUp: [
-                {
-                  question: 'מהו שם בית הספר?',
-                  question_key: 'שם בית הספר'
-                },
-
-                {
-                  question: 'באיזו מסגרת פועל בית הספר?',
-                  question_key: 'סוג המסגרת החינוכית',
-                  answers: [
-                    {
-                      display: 'חינוך ממלכתי',
-                      value: 'חינוך ממלכתי'
-                    },
-                    {
-                      display: 'חינוך ממלכתי דתי',
-                      value: 'חינוך ממלכתי דתי',
-                    },
-                    {
-                      display: 'חינוך חרדי',
-                      value: 'חינוך חרדי'
-                    },
-                    {
-                      display: 'חינוך מיוחד',
-                      value: 'חינוך מיוחד'
-                    },
-                    {
-                      display: 'אחר',
-                      value: 'אחר'
-                    }
-                  ]
-                }
-              ]
-            }
-         },
-
-           {
-            display: 'גן חובה',
-            value: {
-              value: 'גן חובה',
-              followUp: [
-                {
-                  question: 'מהו שם הגן?',
-                  question_key: 'שם הגן'
-                },
-                {
-                  question: 'באיזו מסגרת פועל הגן?',
-                  question_key: 'סוג המסגרת החינוכית',
-                  answers: [
-                    {
-                      display: 'חינוך ממלכתי',
-                      value: 'חינוך ממלכתי'
-                    },
-                    {
-                      display: 'חינוך ממלכתי דתי',
-                      value: 'חינוך ממלכתי דתי',
-                    },
-                    {
-                      display: 'חינוך חרדי',
-                      value: 'חינוך חרדי'
-                    },
-                    {
-                      display: 'חינוך מיוחד',
-                      value: 'חינוך מיוחד'
-                    },
-                    {
-                      display: 'אחר',
-                      value: 'אחר'
-                    }
-                  ]
-                }
-
-              ]
-            },
-          },
-
-          {
-            display: 'גן טרום חובה',
-            value: {
-              value: 'גן טרום חובה',
-              followUp: [
-                {
-                  question: 'מהו שם הגן?',
-                  question_key: 'שם הגן'
-              },
-              {
-                question: 'באיזו מסגרת פועל  הגן?',
-                question_key: 'סוג המסגרת החינוכית',
-                answers: [
-                  {
-                    display: 'חינוך ממלכתי',
-                    value: 'חינוך ממלכתי'
-                  },
-                  {
-                    display: 'חינוך ממלכתי דתי',
-                    value: 'חינוך ממלכתי דתי',
-                  },
-                  {
-                    display: 'חינוך חרדי',
-                    value: 'חינוך חרדי'
-                  },
-                  {
-                    display: 'חינוך מיוחד',
-                    value: 'חינוך מיוחד'
-                  },
-                  {
-                    display: 'אחר',
-                    value: 'אחר'
-                  }
-                ]
-              }
-
-            ]
-          }
-        },
-
-        {
-          display: 'טרום טרום חובה',
-          value:
-            { value: 'טרום טרום חובה',
-              followUp: [
-                {
-                  question: 'מהו שם הגן?',
-                  question_key: 'שם הגן'
-                },
-                {
-                  question: 'באיזו מסגרת פועל הגן?',
-                  question_key: 'סוג המסגרת החינוכית',
-                  answers: [
-                    {
-                      display: 'חינוך ממלכתי',
-                      value: 'חינוך ממלכתי'
-                    },
-                    {
-                      display: 'חינוך ממלכתי דתי',
-                      value: 'חינוך ממלכתי דתי',
-                    },
-                    {
-                      display: 'חינוך חרדי',
-                      value: 'חינוך חרדי'
-                    },
-                    {
-                      display: 'חינוך מיוחד',
-                      value: 'חינוך מיוחד'
-                    },
-                    {
-                      display: 'אחר',
-                      value: 'אחר'
-                    }
-                  ]
-                }
-
-              ]
-            }
-          },
-
-          {
-            display: 'גן פרטי לגיל הרך',
-            value: {
-                value: 'גן פרטי לגיל הרך',
-                followUp: [
-                  {
-                    question: 'מהו שם הגן?',
-                    question_key: 'שם הגן'
-                  },
-                ]
-              }
-            },
-
-          {
-           display: 'חוגים של רשות מקומית',
-           value: {
-             value: 'חוגים של רשות מקומית',
-             followUp: [
-               {
-                 question: 'מהו שם הגן?',
-                 question_key: 'שם הגן'
+       detailedOffender: {
+        question: 'באיזו מסגרת חינוכית מדובר?',
+        options: [
+                  {display: 'אוניברסיטה/מכללה',
+                  value: {
+                   value: 'אוניברסיטה/מכללה',
+                   followUp: [
+                     {
+                       question: 'מהו שם המוסד (האוניברסיטה או המכללה)?',
+                       question_key: 'שם המוסד האקדמי'
+                     }
+                   ]
+                 }
                },
-             ]
-           }
-         }
-       ]
-     },
+
+                  {display: 'בית ספר',
+                   value: {
+                     value: 'בית ספר',
+                     followUp: [
+                       {
+                         question: 'מהו שם בית הספר?',
+                         question_key: 'שם בית הספר'
+                       },
+
+                       {
+                         question: 'באיזו מסגרת פועל בית הספר?',
+                         question_key: 'סוג המסגרת החינוכית',
+                         answers: [
+                           {
+                             display: 'חינוך ממלכתי',
+                             value: 'חינוך ממלכתי'
+                           },
+                           {
+                             display: 'חינוך ממלכתי דתי',
+                             value: 'חינוך ממלכתי דתי',
+                           },
+                           {
+                             display: 'חינוך חרדי',
+                             value: 'חינוך חרדי'
+                           },
+                           {
+                             display: 'חינוך מיוחד',
+                             value: 'חינוך מיוחד'
+                           },
+                           {
+                             display: 'אחר',
+                             value: 'אחר'
+                           }
+                         ]
+                       }
+                     ]
+                   }
+                },
+
+                  {
+                   display: 'גן חובה',
+                   value: {
+                     value: 'גן חובה',
+                     followUp: [
+                       {
+                         question: 'מהו שם הגן?',
+                         question_key: 'שם הגן'
+                       },
+                       {
+                         question: 'באיזו מסגרת פועל הגן?',
+                         question_key: 'סוג המסגרת החינוכית',
+                         answers: [
+                           {
+                             display: 'חינוך ממלכתי',
+                             value: 'חינוך ממלכתי'
+                           },
+                           {
+                             display: 'חינוך ממלכתי דתי',
+                             value: 'חינוך ממלכתי דתי',
+                           },
+                           {
+                             display: 'חינוך חרדי',
+                             value: 'חינוך חרדי'
+                           },
+                           {
+                             display: 'חינוך מיוחד',
+                             value: 'חינוך מיוחד'
+                           },
+                           {
+                             display: 'אחר',
+                             value: 'אחר'
+                           }
+                         ]
+                       }
+
+                     ]
+                   },
+                 },
+
+                 {
+                   display: 'גן טרום חובה',
+                   value: {
+                     value: 'גן טרום חובה',
+                     followUp: [
+                       {
+                         question: 'מהו שם הגן?',
+                         question_key: 'שם הגן'
+                     },
+                     {
+                       question: 'באיזו מסגרת פועל  הגן?',
+                       question_key: 'סוג המסגרת החינוכית',
+                       answers: [
+                         {
+                           display: 'חינוך ממלכתי',
+                           value: 'חינוך ממלכתי'
+                         },
+                         {
+                           display: 'חינוך ממלכתי דתי',
+                           value: 'חינוך ממלכתי דתי',
+                         },
+                         {
+                           display: 'חינוך חרדי',
+                           value: 'חינוך חרדי'
+                         },
+                         {
+                           display: 'חינוך מיוחד',
+                           value: 'חינוך מיוחד'
+                         },
+                         {
+                           display: 'אחר',
+                           value: 'אחר'
+                         }
+                       ]
+                     }
+
+                   ]
+                 }
+               },
+
+               {
+                 display: 'טרום טרום חובה',
+                 value:
+                   { value: 'טרום טרום חובה',
+                     followUp: [
+                       {
+                         question: 'מהו שם הגן?',
+                         question_key: 'שם הגן'
+                       },
+                       {
+                         question: 'באיזו מסגרת פועל הגן?',
+                         question_key: 'סוג המסגרת החינוכית',
+                         answers: [
+                           {
+                             display: 'חינוך ממלכתי',
+                             value: 'חינוך ממלכתי'
+                           },
+                           {
+                             display: 'חינוך ממלכתי דתי',
+                             value: 'חינוך ממלכתי דתי',
+                           },
+                           {
+                             display: 'חינוך חרדי',
+                             value: 'חינוך חרדי'
+                           },
+                           {
+                             display: 'חינוך מיוחד',
+                             value: 'חינוך מיוחד'
+                           },
+                           {
+                             display: 'אחר',
+                             value: 'אחר'
+                           }
+                         ]
+                       }
+
+                     ]
+                   }
+                 },
+
+                 {
+                   display: 'גן פרטי לגיל הרך',
+                   value: {
+                       value: 'גן פרטי לגיל הרך',
+                       followUp: [
+                         {
+                           question: 'מהו שם הגן?',
+                           question_key: 'שם הגן'
+                         },
+                       ]
+                     }
+                   },
+
+                 {
+                  display: 'חוגים של רשות מקומית',
+                  value: {
+                    value: 'חוגים של רשות מקומית',
+                    followUp: [
+                      {
+                        question: 'מהו שם החוג או המסגרת?',
+                        question_key: 'שם החוג או המסגרת'
+                      },
+                    ]
+                  }
+                }
+              ]
+            },
+       complaints: {
+         question: 'על איזה רקע, לדעתך, הופלית או נהגו כלפיך בגזענות?',
+         options: [
+          {value: 'אפליה על רקע מוצא, עדה או לאום, או צבע עור', display: 'מוצא, עדה או לאום, או צבע עור'},
+          {value: 'אפליה על רקע דת', display: 'דת'},
+          {value: 'אפליה על רקע מין, נטייה מינית או זהות מגדרית', display: 'מין, נטייה מינית או זהות מגדרית'},
+          {display: 'אפליה על רקע אחר', value: {
+              value: 'אפליה על רקע אחר',
+              followUp: [
+              {question: 'על איזה רקע התרחשו האירוע או ההפליה?', question_key: 'אפליה על רקע אחר'}
+              ]
+            }
+          }
+        ]
+      },
        askForEventLocation: [ {question: 'מה כתובת או מיקום הארוע? (אם לא ידוע, כתבו "לא ידוע")', answers: null}],
        askForEventDescription: [
-         {
-           question: 'על איזה רקע, לדעתך, הופלית או נהגו כלפיך בגזענות?',
-           question_key: 'אפליה על רקע',
-           answers: [
-             {value: 'מוצא, עדה או לאום, או צבע עור', display: 'מוצא, עדה או לאום, או צבע עור'},
-             {value: 'דת', display: 'דת'},
-             {value: 'מין, נטייה מינית או זהות מגדרית', display: 'מין, נטייה מינית או זהות מגדרית'},
-             {display: 'אחר', value:
-              [{
-                question: 'על איזה רקע התרחשו האירוע או ההפליה?',
-                question_key: ''
-              }]}
-           ]
-         },
          {
            question: 'תארו את האירוע',
           question_key: 'תיאור נוסף'
@@ -530,6 +531,46 @@ export class AppComponent implements OnInit {
     const offenderIndex = await this.content.waitForInput();
     const offenderObject = offenders[offenderIndex];   // create an offender object for the rest of the script
     hubspotContact.offender_code = offenderIndex;
+
+    if (offenderObject.detailedOffender) {                       // if we need to specifiy the offender tpye
+        const deatailedOffenderObject = offenderObject.detailedOffender;
+        let detailedOffender = '';
+
+        if ('options' in deatailedOffenderObject) {
+        this.content.addOptions(deatailedOffenderObject.question, deatailedOffenderObject.options);
+
+        const chosendetailedOffenderObject = await this.content.waitForInput();
+
+        if (typeof(chosendetailedOffenderObject) === 'object' && 'followUp' in chosendetailedOffenderObject) {
+          const deatiledOffenderFollowUpQuestions = chosendetailedOffenderObject.followUp;
+          const followUpAnswers = [];
+          for (let followUpQuestionIndex = 0;
+            followUpQuestionIndex <= deatiledOffenderFollowUpQuestions.length - 1; followUpQuestionIndex++) {
+
+            const questionObject = deatiledOffenderFollowUpQuestions[followUpQuestionIndex];
+            const newQuestion = questionObject.question;
+            const question_key = questionObject.question_key;
+
+            if ('answers' in questionObject) {                               // what is the type of the question: options / open question
+              this.content.addOptions(newQuestion,  questionObject.answers);
+              } else {
+              this.content.addTo(newQuestion);
+            }
+            const newAnswer = await this.content.waitForInput();
+            followUpAnswers.push({'key': question_key, 'detail': newAnswer});
+          }
+          detailedOffender = followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
+        } else {
+          detailedOffender = chosendetailedOffenderObject;
+        }
+
+        } else {
+          this.content.addTo(deatailedOffenderObject);
+          detailedOffender = await this.content.waitForInput();
+        }
+        offenderObject.displayValue += `, ${detailedOffender}`;
+    }
+
     hubspotContact.offender = offenderObject.displayValue;
     await this.hubspot.updateUser(hubspotContact);
     console.log(`updated offender: ${hubspotContact.offender}`);
@@ -559,7 +600,7 @@ export class AppComponent implements OnInit {
           const newAnswer = await this.content.waitForInput();
           followUpAnswers.push({'key': question_key, 'detail': newAnswer});
         }
-        copmlaintDescription = complaintType.value + ', ' + followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
+        copmlaintDescription = followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
       } else {                                                     // if there are no follow up questions, just save the string
           copmlaintDescription = complaintType;
           }
@@ -658,32 +699,49 @@ export class AppComponent implements OnInit {
     console.log('updated required_service');
 
     if ('askForEventDescription' in offenderObject) {
+      const moreDescriptionDetails = [];
+      let answers;
       const eventDescriptionQuestions: any = offenderObject.askForEventDescription;
-
       if (typeof(eventDescriptionQuestions) === 'object') {
             // in case of follow up questions ask and combine all answers into a string
             const followUpAnswers = [];
-            console.log(eventDescriptionQuestions);
-            for (let followUpQuestionIndex = 0; followUpQuestionIndex <= eventDescriptionQuestions.length - 1; followUpQuestionIndex++) {
-              const questionObject = eventDescriptionQuestions[followUpQuestionIndex];
-              const newQuestion = questionObject.question;
-              const question_key = questionObject.question_key;
+            for (let descriptionQuestionIndex = 0;
+                    descriptionQuestionIndex <= eventDescriptionQuestions.length - 1; descriptionQuestionIndex++) {
+              const questionObject = eventDescriptionQuestions[descriptionQuestionIndex];
+              let newQuestion = questionObject.question;
+              let question_key = questionObject.question_key;
 
               if ('answers' in questionObject) {                               // what is the type of the question: options / open question
                 this.content.addOptions(newQuestion,  questionObject.answers);
               } else {
                 this.content.addTo(newQuestion);
               }
-              const newAnswer = await this.content.waitForInput();
+              let newAnswer = await this.content.waitForInput();
+
+              if (typeof newAnswer === 'object') {                                        // check if we need to handle a follow-up question
+                const followUpQuestions = newAnswer;
+                for (let followUpQuestionIndex = 0; followUpQuestionIndex <= followUpQuestions.length - 1; followUpQuestionIndex++) {
+                    newQuestion = followUpQuestions[followUpQuestionIndex].question;
+                    question_key = followUpQuestions[followUpQuestionIndex].question_key;
+
+                    this.content.addTo(newQuestion);
+                    newAnswer = await this.content.waitForInput();
+                    moreDescriptionDetails.push({'key': question_key, 'detail': newAnswer});
+                  }
+
+              answers = moreDescriptionDetails.map(e => (e.key + ': ' + e.detail)).join(', ');
+            } else {
+              answers = newAnswer;
+              }
               followUpAnswers.push({'key': question_key, 'detail': newAnswer});
             }
-            copmlaintDescription = complaintType.value + ', ' + followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
+            copmlaintDescription = followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
 
           } else {
                                                              // if there is a single (non-object) question, just save the string
             this.content.addTo(eventDescriptionQuestions);
             const newAnswer = await this.content.waitForInput();
-            copmlaintDescription = complaintType.value + `, ` + newAnswer;
+            copmlaintDescription = newAnswer;
           }
         hubspotContact.event_description = copmlaintDescription;
 
@@ -741,10 +799,14 @@ export class AppComponent implements OnInit {
      אנחנו נעבור על כל המידע והחומר ששלחת ונחזור אליך תוך 2 ימים.');
      // * we should tell the users how (which platform(s)) we will reach them
 
-    this.content.addTo(`לצורכי QA בלבד: \
+      this.content.addTo('יש לכם משוב או הצעה לשיפור על השיחה הזו?\
+       <a href="https://forms.gle/BBdqGcXbFCuHkh7V8" target="_blank">לחצו כאן</a>');
+
+    /*this.content.addTo(`לצורכי QA בלבד: \
       <a href="http://hasadna.github.io/reportit-agent/?vid=${vid}" target="_blank"}>\
       קישור להמשך בדיקה, מוקדנים\
       </a>`);
+    */
   }
 
 }
