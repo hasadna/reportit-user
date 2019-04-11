@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentService } from 'hatool';
+import { ScriptRunnerService, ContentService } from 'hatool';
 import { HubspotService } from './hubspot.service';
 import { FileUploader } from 'hatool';
+import { async } from '@angular/core/testing';
 
 const offenders =
 [
@@ -441,7 +442,8 @@ export class AppComponent implements OnInit {
   title = 'hatool';
   helpVisible = false;
 
-  constructor(private content: ContentService,
+  constructor(private runner: ScriptRunnerService,
+              private content: ContentService,
               private hubspot: HubspotService) {}
 
   ngOnInit() {
@@ -450,365 +452,43 @@ export class AppComponent implements OnInit {
     this.content.uploadedFileText = 'קובץ הועלה בהצלחה';
     this.content.notUploadedFileText = 'תקלה בהעלאת קובץ';
     this.content.inputPlaceholder = 'הקלידו הודעה...';
-    this.doIt();
-  }
 
-  async doIt() {
-    const hubspotContact: any = {};
+    // TODO for Noam:
+    // - Fix the isWorkingHours function
+    // - Call the createUser(context, record) at some point in the script
+    //   Record the result of this command in the 'agent_link' field
+    // - Call updateUser(record) at selected points in the code.
+    // - Go over the original flow and make sure all fields were migrated correctly to the script
+    // - For uploading files call 'upload(key, uploader)' - it will return the link to the uploaded file
 
-    this.content.addTo('שלום, הגעת למוקד סיוע לקורבנות גזענות והפליה.');
-
-    //  day + time check and set the expected answer
-    const startTime = openCallTime();
-
-    if (['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי'].indexOf(startTime.dayName) >= 0) {
-      this.content.addTo('לפני שנעביר את הפניה שלך לכונן, נבקש ממך לענות על כמה שאלות, שיסייעו לנו להשיב במהירות.');
-      } else {
-      this.content.addTo('המוקדנים שלנו עובדים בימים א-ה בשעות 9:00 עד 17:00.' +
-                         ' כדי שנוכל לחזור אליך במהירות נבקש ממך לענות לנו על כמה שאלות');
-      }
-    this.content.addTo('כדי שנוכל לטפל בפניה אנו זקוקים לפרטי התקשרות.\
-     לא ייעשה בפרטים אלו כל שימוש חוץ מטיפול בתלונה בדרך שבה תאשר/י לנו.');
-    this.content.addTo('מה השם שלך? אם את/ה רוצ/ה להישאר אנונימי/ת בשלב זה כתבו "אנונימי"');
-    const name = await this.content.waitForInput();
-    hubspotContact.full_name = name;
-    // enable user to leave name input empty
-
-    const contacts = [];
-    let askForContacts = true;
-    this.content.addTo(`שלום ${name}. איך תרצה/תרצי שניצור איתך קשר בהמשך התהליך?`);
-    while (askForContacts || contacts.length === 0) {
-      const currentContact = {method: null,
-                              details: null};
-
-      this.content.addOptions(
-          'בחרו אמצעי התקשרות',
-          [
-            {value: 'phone', display: 'טלפון'},
-            {value: 'email', display: 'דוא"ל'},
-            {value: 'whatsapp', display: 'וואטסאפ'},
-            {value: 'facebook', display: 'facebook messenger'},
-          ]);
-
-      currentContact.method = await this.content.waitForInput();
-
-      const contactDetailsOptions = {        // question and regex validator for user's detailed contact method
-        'phone': {question: 'מה מספר הטלפון שלך?', validator: null},
-        'email': {question: 'מה כתובת האימייל שלך?', validator: null},
-        'whatsapp': {question: 'מה מספר הוואטסאפ או שם המשתמש/ת שלך?', validator: null},
-        'facebook': {question: 'מה שם החשבון שלך?', validator: null},
-      };
-
-      this.content.addTo(contactDetailsOptions[currentContact.method].question);
-      currentContact.details = await this.content.waitForInput();
-
-      contacts.push(currentContact);
-      hubspotContact[currentContact.method] = currentContact.details;
-      // add input validation, add it to contactDetailsOptions as RegEx
-
-      this.content.addOptions(                                                // check for other communication methods
-        'האם ישנם פרטי התקשרות נוספים שתוכלו למסור כדי שנוכל ליצור אתכם קשר?',
-        [
-          {value: true, display: 'כן'},
-          {value: false, display: 'לא'},
-        ]
-      );
-
-
-      askForContacts = await this.content.waitForInput();
-      this.content.addFrom(askForContacts ? 'כן' : 'לא');
-    }
-
-    const vid = await this.hubspot.createUser(hubspotContact);         // * check how to update CRM during the contact details loop
-    hubspotContact.agent_link = `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
-    await this.hubspot.updateUser(hubspotContact);
-    console.log('updated vid');
-
-    this.content.addOptions(
-      ' או לאיזה תחום קשור האירוע? מי נהג כלפיך בגזענות או באופן מפלה?',
-      offenders
-    );
-    await this.hubspot.updateUser(hubspotContact);
-
-    const offenderIndex = await this.content.waitForInput();
-    const offenderObject = offenders[offenderIndex];   // create an offender object for the rest of the script
-    hubspotContact.offender_code = offenderIndex;
-
-    if (offenderObject.detailedOffender) {                       // if we need to specifiy the offender tpye
-        const deatailedOffenderObject = offenderObject.detailedOffender;
-        let detailedOffender = '';
-
-        if ('options' in deatailedOffenderObject) {
-        this.content.addOptions(deatailedOffenderObject.question, deatailedOffenderObject.options);
-
-        const chosendetailedOffenderObject = await this.content.waitForInput();
-
-        if (typeof(chosendetailedOffenderObject) === 'object' && 'followUp' in chosendetailedOffenderObject) {
-          const deatiledOffenderFollowUpQuestions = chosendetailedOffenderObject.followUp;
-          const followUpAnswers = [];
-          for (let followUpQuestionIndex = 0;
-            followUpQuestionIndex <= deatiledOffenderFollowUpQuestions.length - 1; followUpQuestionIndex++) {
-
-            const questionObject = deatiledOffenderFollowUpQuestions[followUpQuestionIndex];
-            const newQuestion = questionObject.question;
-            const question_key = questionObject.question_key;
-
-            if ('answers' in questionObject) {                               // what is the type of the question: options / open question
-              this.content.addOptions(newQuestion,  questionObject.answers);
-              } else {
-              this.content.addTo(newQuestion);
-            }
-            const newAnswer = await this.content.waitForInput();
-            followUpAnswers.push({'key': question_key, 'detail': newAnswer});
-          }
-          detailedOffender = followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
-        } else {
-          detailedOffender = chosendetailedOffenderObject;
+    this.runner.run(
+      'assets/script.json',
+      0,
+      {
+        isWorkingTime: () => {
+          console.log('is working hours!!');
+          return 'true';
+        },
+        createUser: async (context, record) => {
+          const vid = await this.hubspot.createUser(record);
+          context.vid = vid;
+          return `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
+        },
+        saveUser: async (record) => {
+          await this.hubspot.updateUser(record);
+        },
+        uploader: async (key, uploader: FileUploader) => {
+          uploader.active = true;
+          const uploaded = await this.hubspot.uploadFile(
+            uploader.selectedFile, this.hubspot.vid + '/' + key,
+              (progress) => { uploader.progress = progress; },
+              (success) => { uploader.success = success; }
+          );
+          return uploaded;
         }
-
-        } else {
-          this.content.addTo(deatailedOffenderObject);
-          detailedOffender = await this.content.waitForInput();
-        }
-        offenderObject.displayValue += `, ${detailedOffender}`;
-    }
-
-    hubspotContact.offender = offenderObject.displayValue;
-    await this.hubspot.updateUser(hubspotContact);
-    console.log(`updated offender: ${hubspotContact.offender}`);
-
-
-    this.content.addOptions(                                          // choose complaint type
-        offenderObject.complaints.question,
-        offenderObject.complaints.options
-    );
-
-    const complaintType = await this.content.waitForInput();            // check if complaint type consist specific follow-up questions
-    let copmlaintDescription;
-    if (typeof(complaintType) === 'object' && 'followUp' in complaintType) {
-            // in case of follow up questions ask and combine all answers into a string
-        const complaintFollowUpQuestions = complaintType.followUp;
-        const followUpAnswers = [];
-        for (let followUpQuestionIndex = 0; followUpQuestionIndex <= complaintFollowUpQuestions.length - 1; followUpQuestionIndex++) {
-          const questionObject = complaintFollowUpQuestions[followUpQuestionIndex];
-          const newQuestion = questionObject.question;
-          const question_key = questionObject.question_key;
-
-          if ('answers' in questionObject) {                               // what is the type of the question: options / open question
-            this.content.addOptions(newQuestion,  questionObject.answers);
-            } else {
-            this.content.addTo(newQuestion);
-          }
-          const newAnswer = await this.content.waitForInput();
-          followUpAnswers.push({'key': question_key, 'detail': newAnswer});
-        }
-        copmlaintDescription = followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
-      } else {                                                     // if there are no follow up questions, just save the string
-          copmlaintDescription = complaintType;
-          }
-    hubspotContact.complaint_type = copmlaintDescription;
-    await this.hubspot.updateUser(hubspotContact);
-    console.log('updated complaint type');
-
-
-
-    if ('askForOffenderDetails' in offenderObject) {                            // check if we should ask optional offender details quetsion
-      let answers;
-      const offenderDetails = [];
-      const offenderDetailsQuestions = offenderObject.askForOffenderDetails;
-      for (let questionIndex = 0; questionIndex <= offenderDetailsQuestions.length - 1; questionIndex++) {
-
-        const questionObject = offenderDetailsQuestions[questionIndex];
-        const question = questionObject.question;
-
-        if ('answers' in questionObject) {                               // what is the type of the question: options / open question
-          this.content.addOptions(question,  questionObject.answers);
-          } else {
-          this.content.addTo(question);
-        }
-        const answer = await this.content.waitForInput();
-
-        if (typeof answer === 'object') {                                        // check if we need to handle a follow-up question
-          const followUpQuestions = answer;
-          for (let followUpQuestionIndex = 0; followUpQuestionIndex <= followUpQuestions.length - 1; followUpQuestionIndex++) {
-            const newQuestion = followUpQuestions[followUpQuestionIndex].question;
-            const question_key = followUpQuestions[followUpQuestionIndex].question_key;
-
-            this.content.addTo(newQuestion);
-            const newAnswer = await this.content.waitForInput();
-            offenderDetails.push({'key': question_key, 'detail': newAnswer});
-
-          }
-          answers = offenderDetails.map(e => (e.key + ': ' + e.detail)).join(', ');
-        } else {
-          answers = answer;
-        }
-      }
-      hubspotContact.offender_person_details = answers;
-      await this.hubspot.updateUser(hubspotContact);
-      console.log('updated offender_person_details');
-    }
-
-
-    if ('askForEventLocation' in offenderObject) {     // check if/how we should ask for the event location
-      const locationDetails = [];
-      let answers;
-      const locationDetailsQuestions = offenderObject.askForEventLocation;
-      for (let questionIndex = 0; questionIndex <= locationDetailsQuestions.length - 1; questionIndex++) {
-
-        const questionObject = locationDetailsQuestions[questionIndex];
-        const question = questionObject.question;
-
-        if ('answers' in questionObject && questionObject.answers != null) {  // what is the type of the question: options / open question
-          this.content.addOptions(question,  questionObject.answers);
-          } else {
-          this.content.addTo(question);
-        }
-        const answer = await this.content.waitForInput();
-
-        if (typeof answer === 'object') {                                        // check if we need to handle a follow-up question
-          const followUpQuestions = answer;
-          for (let followUpQuestionIndex = 0; followUpQuestionIndex <= followUpQuestions.length - 1; followUpQuestionIndex++) {
-              const newQuestion = followUpQuestions[followUpQuestionIndex].question;
-              const question_key = followUpQuestions[followUpQuestionIndex].question_key;
-
-              this.content.addTo(newQuestion);
-              const newAnswer = await this.content.waitForInput();
-              locationDetails.push({'key': question_key, 'detail': newAnswer});
-            }
-
-        answers = locationDetails.map(e => (e.key + ': ' + e.detail)).join(', ');
-      } else {
-        answers = answer;
-        }
-        }
-
-        hubspotContact.event_location = answers;
-        await this.hubspot.updateUser(hubspotContact);
-        console.log('updated event_location');
-      }
-
-    if ('services' in offenders[offenderIndex]) {
-    this.content.addOptions(                                         // choose service type
-      'איזו עזרה או סיוע תרצו לקבל מאיתנו?',
-      offenders[offenderIndex]['services']
-      );
-    }
-
-    const requiredService = await this.content.waitForInput();
-    hubspotContact.required_service = requiredService;
-    await this.hubspot.updateUser(hubspotContact);
-    console.log('updated required_service');
-
-    if ('askForEventDescription' in offenderObject) {
-      const moreDescriptionDetails = [];
-      let answers;
-      const eventDescriptionQuestions: any = offenderObject.askForEventDescription;
-      if (typeof(eventDescriptionQuestions) === 'object') {
-            // in case of follow up questions ask and combine all answers into a string
-            const followUpAnswers = [];
-            for (let descriptionQuestionIndex = 0;
-                    descriptionQuestionIndex <= eventDescriptionQuestions.length - 1; descriptionQuestionIndex++) {
-              const questionObject = eventDescriptionQuestions[descriptionQuestionIndex];
-              let newQuestion = questionObject.question;
-              let question_key = questionObject.question_key;
-
-              if ('answers' in questionObject) {                               // what is the type of the question: options / open question
-                this.content.addOptions(newQuestion,  questionObject.answers);
-              } else {
-                this.content.addTo(newQuestion);
-              }
-              let newAnswer = await this.content.waitForInput();
-
-              if (typeof newAnswer === 'object') {                                        // check if we need to handle a follow-up question
-                const followUpQuestions = newAnswer;
-                for (let followUpQuestionIndex = 0; followUpQuestionIndex <= followUpQuestions.length - 1; followUpQuestionIndex++) {
-                    newQuestion = followUpQuestions[followUpQuestionIndex].question;
-                    question_key = followUpQuestions[followUpQuestionIndex].question_key;
-
-                    this.content.addTo(newQuestion);
-                    newAnswer = await this.content.waitForInput();
-                    moreDescriptionDetails.push({'key': question_key, 'detail': newAnswer});
-                  }
-
-              answers = moreDescriptionDetails.map(e => (e.key + ': ' + e.detail)).join(', ');
-            } else {
-              answers = newAnswer;
-              }
-              followUpAnswers.push({'key': question_key, 'detail': newAnswer});
-            }
-            copmlaintDescription = followUpAnswers.map(e => (e.key + ': ' + e.detail)).join(', ');
-
-          } else {
-                                                             // if there is a single (non-object) question, just save the string
-            this.content.addTo(eventDescriptionQuestions);
-            const newAnswer = await this.content.waitForInput();
-            copmlaintDescription = newAnswer;
-          }
-        hubspotContact.event_description = copmlaintDescription;
-
-        }
-
-
-    console.log('event_description', copmlaintDescription);
-    // validate there was an input
-    await this.hubspot.updateUser(hubspotContact);
-    console.log('updated event_description');
-
-
-    let moreResourcesUpload = true;
-    let resourceIndex = 1;
-
-    this.content.addOptions(                                   // upload first resource check
-      'האם יש בידיך צילומים, מסמכים או תיעוד של המקרה שתוכל/י להעביר כעת?',
-      [
-        {value: true, display: 'כן'},
-        {value: false, display: 'לא'}
-      ]);
-
-    moreResourcesUpload = await this.content.waitForInput();        // upload more resources loop
-    while (moreResourcesUpload && resourceIndex <= 5) {                       // uploaded files limit, following the CRM fields settings
-
-      this.content.addUploader('אנא בחר/י את הקובץ הרלוונטי');
-      const file: FileUploader = await this.content.waitForInput();
-      file.active = true;
-      const uploaded = await this.hubspot.uploadFile(
-          file.selectedFile, this.hubspot.vid + '/file-' + resourceIndex,
-          (progress) => { file.progress = progress; },
-          (success) => { file.success = success; }
-      );
-      console.log('UPLOADED', uploaded);
-      hubspotContact['file' + resourceIndex] = uploaded;
-
-      this.content.addTo('מה יש בקובץ ששלחתם?');
-
-      const resouceDescription = await this.content.waitForInput();
-      hubspotContact['file' + resourceIndex + 'description'] = resouceDescription;
-      this.hubspot.updateUser(hubspotContact);
-
-      this.content.addOptions(
-        'האם יש בידיך עוד צילומים, מסמכים או תיעוד של המקרה שתוכל/י להעביר לנו כעת?',
-        [
-          {value: true, display: 'כן'},
-          {value: false, display: 'לא'}
-        ]);
-
-      moreResourcesUpload = await this.content.waitForInput();
-      resourceIndex += 1;
-    }
-
-    this.content.addTo('תודה לך שפנית אלינו.\
-     אנחנו נעבור על כל המידע והחומר ששלחת ונחזור אליך תוך 2 ימים.');
-     // * we should tell the users how (which platform(s)) we will reach them
-
-      this.content.addTo('יש לכם משוב או הצעה לשיפור על השיחה הזו?\
-       <a href="https://forms.gle/BBdqGcXbFCuHkh7V8" target="_blank">לחצו כאן</a>');
-
-    /*this.content.addTo(`לצורכי QA בלבד: \
-      <a href="http://hasadna.github.io/reportit-agent/?vid=${vid}" target="_blank"}>\
-      קישור להמשך בדיקה, מוקדנים\
-      </a>`);
-    */
+      },
+      (key, value) => {}
+    ).subscribe(() => { console.log('done!'); });
   }
 
 }
