@@ -416,22 +416,6 @@ const offenders =
        services: null,
 */
 
-function openCallTime() {
-        const m_names = ['ינואר', 'פברואר', 'מרץ',
-                        'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר',
-                        'אוקטובר', 'נובמבר', 'דצמבר'];
-
-        const d_names = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
-
-        const myDate = new Date();
-        myDate.setDate(myDate.getDate() + 7);
-        const curr_date = myDate.toISOString().slice(0, 10);
-        const curr_month = myDate.getMonth();
-        const curr_day  = myDate.getDay();
-        const curr_time = (myDate.getHours(), myDate.getMinutes());
-        return ({currentDate: curr_date, dayName: d_names[curr_day], currentTime: curr_time });
-    }
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -466,8 +450,38 @@ export class AppComponent implements OnInit {
       0,
       {
         isWorkingTime: () => {
-          console.log('is working hours!!');
-          return 'true';
+          // Check if current time is a working time or not
+          const date = new Date();
+          const dayOfTheWeek = date.getDay();
+
+          const currentMinute = date.getMinutes();
+          const currentHour = date.getHours();
+
+          const workTimes = {                      // Working days and hours
+            0: {'start': '09:00',         // Sunday
+                'end': '16:00'},
+            1: {'start': '09:00',        // Monday
+                'end': '16:00'},
+            2: {'start': '09:00',       // Tuesday
+                'end': '16:00'},
+            3: {'start': '09:00',       // Wednesday
+                'end': '16:00'},
+            4: {'start': '09:00',      // Thursday
+                'end': '16:00'},
+          };
+
+          if (dayOfTheWeek in workTimes) {
+            const [dayStartHour, dayStartMinute] = workTimes[dayOfTheWeek]['start'].split(':');
+            const [dayEndtHour, dayEndMinute] = workTimes[dayOfTheWeek]['end'].split(':');
+            if (
+                (currentHour >= dayStartHour && currentMinute >= dayStartMinute) &&
+                (currentHour <= dayEndtHour && currentMinute <= dayEndMinute)
+              ) {
+                return 'true';
+              } else {
+                return 'false';
+              }
+            }
         },
         createUser: async (context, record) => {
           const vid = await this.hubspot.createUser(record);
