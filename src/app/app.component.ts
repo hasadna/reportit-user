@@ -438,7 +438,7 @@ export class AppComponent implements OnInit {
     this.content.inputPlaceholder = 'הקלידו הודעה...';
 
     // TODO for Noam:
-    // - Fix the isWorkingHours function
+    // - Done: Fix the isWorkingHours function
     // - Call the createUser(context, record) at some point in the script
     //   Record the result of this command in the 'agent_link' field
     // - Call updateUser(record) at selected points in the code.
