@@ -4,6 +4,8 @@ import { HubspotService } from './hubspot.service';
 import { FileUploader } from 'hatool';
 import { async } from '@angular/core/testing';
 
+
+
 const offenders =
 [
       {value: 0,
@@ -374,47 +376,6 @@ const offenders =
                {value: 'הגשת תלונה', display: 'הגשת תלונה לרשות הרלוונטית' },
              ],
       }];
-/*      {value: 4,
-       display: 'עובד/ת רשות ציבורית',
-       displayValue: 'עובד/ת רשות ציבורית',
-       complaints: null,
-       services: null,
-      },
-
-      {value: 5,
-       display: 'עובד/ת רשות מקומית',
-       displayValue: 'עובד/ת רשות מקומית',
-       complaints: null,
-       services: null,
-      },
-
-      {value: 6,
-       display: 'איש/אשת מקצוע',
-       displayValue: 'איש/אשת מקצוע',
-       complaints: null,
-       services: null,
-      },
-
-      {value: 7,
-       display: 'עסק',
-       displayValue: 'עסק',
-       complaints: null,
-       services: null,
-      },
-
-      {value: 8,
-       display: 'אדם פרטי',
-       displayValue: 'אדם פרטי',
-       complaints: null,
-       services: null,
-      },
-
-      {value: 9,
-       display: 'other',
-       displayValue: 'אחר',
-       complaints: null,
-       services: null,
-*/
 
 @Component({
   selector: 'app-root',
@@ -439,11 +400,23 @@ export class AppComponent implements OnInit {
 
     // TODO for Noam:
     // - Done: Fix the isWorkingHours function
-    // - Call the createUser(context, record) at some point in the script
+    // - Done Call the createUser(context, record) at some point in the script
     //   Record the result of this command in the 'agent_link' field
     // - Call updateUser(record) at selected points in the code.
     // - Go over the original flow and make sure all fields were migrated correctly to the script
     // - For uploading files call 'upload(key, uploader)' - it will return the link to the uploaded file
+
+
+    const recordKeysToSave = (record) => {
+      // filter records fields, to save those that do not start with '_'
+      const result = {};
+      for (const key in record) {
+        if (key.match(/^[^_]/)) {
+          result[key] = record[key];
+          }
+        }
+        return result;
+      };
 
     this.runner.run(
       'assets/script.json',
@@ -484,12 +457,14 @@ export class AppComponent implements OnInit {
             }
         },
         createUser: async (context, record) => {
-          const vid = await this.hubspot.createUser(record);
+          const recordToSave = recordKeysToSave(record);
+          const vid = await this.hubspot.createUser(recordToSave);
           context.vid = vid;
           return `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
         },
         saveUser: async (record) => {
-          await this.hubspot.updateUser(record);
+          const recordToSave = recordKeysToSave(record);
+          await this.hubspot.updateUser(recordToSave);
         },
         uploader: async (key, uploader: FileUploader) => {
           uploader.active = true;
