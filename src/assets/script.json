@@ -16,7 +16,7 @@
                             "cmd.isWorkingTime()"
                         ],
                         "collect": {
-                            "key": "is_working_time",
+                            "key": "_is_working_time",
                             "options": [
                                 {
                                     "default": true,
@@ -82,6 +82,11 @@
                         }
                     },
                     {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
                         "action": "פרטי התקשרות: האם להוסיף פרטים?"
                     }
                 ]
@@ -103,6 +108,11 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
                     },
                     {
                         "action": "פרטי התקשרות: האם להוסיף פרטים?"
@@ -128,6 +138,11 @@
                         }
                     },
                     {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
                         "action": "פרטי התקשרות: האם להוסיף פרטים?"
                     }
                 ]
@@ -151,6 +166,11 @@
                         }
                     },
                     {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
                         "action": "פרטי התקשרות: האם להוסיף פרטים?"
                     }
                 ]
@@ -163,7 +183,7 @@
                             "האם ישנם פרטי התקשרות נוספים שתוכלו למסור כדי שנוכל ליצור אתכם קשר?"
                         ],
                         "collect": {
-                            "key": "more_contact_deatails",
+                            "key": "_more_contact_details",
                             "options": [
                                 {
                                     "default": true,
@@ -231,7 +251,7 @@
                             }
                         ],
                         "collect": {
-                            "key": "contact_method",
+                            "key": "_contact_method",
                             "options": [
                                 {
                                     "default": true,
@@ -271,11 +291,6 @@
                 "script": [
                     {
                         "text": [
-                            "This is offender pollice"
-                        ]
-                    },
-                    {
-                        "text": [
                             "מהו סוג האירוע עליו תרצו לדווח?"
                         ],
                         "quick_replies": [
@@ -306,17 +321,17 @@
                                 {
                                     "pattern": "התנהגות או התבטאות גזענית מצד שוטר/ת",
                                     "type": "string",
-                                    "action": "משטרה: התנהגות או התבטאות גזענית מצד שוטר/ת"
+                                    "action": "משטרה: בקשה לתיאור המקרה"
                                 },
                                 {
                                     "pattern": "פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה",
                                     "type": "string",
-                                    "action": "משטרה: פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה"
+                                    "action": "משטרה: בקשה לתיאור המקרה"
                                 },
                                 {
                                     "pattern": "other",
                                     "type": "string",
-                                    "action": "משטרה: אחר"
+                                    "action": "משטרה: בקשה לתיאור המקרה"
                                 }
                             ]
                         }
@@ -544,14 +559,14 @@
                 ]
             },
             {
-                "topic": "העלאת קובץ: בחירת קובץ ותיאור",
+                "topic": "העלאת קבצים: בחירת קובץ ותיאור *5",
                 "script": [
                     {
                         "text": [
-                            "cmd.ChooseFileToUpload()"
+                            "cmd.uploader(key,uploader)"
                         ],
                         "collect": {
-                            "key": "file_name",
+                            "key": "file1",
                             "options": [
                                 {
                                     "default": true,
@@ -566,7 +581,7 @@
                             "מה יש בקובץ ששלחתם?"
                         ],
                         "collect": {
-                            "key": "file_description",
+                            "key": "file1description",
                             "options": [
                                 {
                                     "default": true,
@@ -578,25 +593,314 @@
                     },
                     {
                         "text": [
-                            "cmd.FetchFileIndexToSave()"
+                            "cmd.saveUser(record)"
                         ]
                     },
                     {
                         "text": [
-                            "cmd.SaveFile(file)name, file_description)"
+                            "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
+                        ],
+                        "collect": {
+                            "key": "_more_upload",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "repeat"
+                                },
+                                {
+                                    "pattern": "true",
+                                    "type": "string",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "false",
+                                    "type": "string",
+                                    "action": "סיום שיחה"
+                                }
+                            ]
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
                         ]
                     },
                     {
-                        "action": "העלאת קבצים: האם להעלות קובץ נוסף?"
+                        "text": [
+                            "cmd.uploader(key,uploader)"
+                        ],
+                        "collect": {
+                            "key": "file2",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "מה יש בקובץ ששלחתם?"
+                        ],
+                        "collect": {
+                            "key": "file2description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "text": [
+                            "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
+                        ],
+                        "collect": {
+                            "key": "_more_upload",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "repeat"
+                                },
+                                {
+                                    "pattern": "true",
+                                    "type": "string",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "false",
+                                    "type": "string",
+                                    "action": "סיום שיחה"
+                                }
+                            ]
+                        },
+                        "platforms": {
+                            "web": {
+                                "files": []
+                            }
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "text": [
+                            "cmd.uploader(key,uploader)"
+                        ],
+                        "meta": [],
+                        "collect": {
+                            "key": "file3",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "מה יש בקובץ ששלחתם?"
+                        ],
+                        "collect": {
+                            "key": "file3description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "text": [
+                            "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
+                        ],
+                        "collect": {
+                            "key": "_more_upload",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "repeat"
+                                },
+                                {
+                                    "pattern": "true",
+                                    "type": "string",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "false",
+                                    "type": "string",
+                                    "action": "סיום שיחה"
+                                }
+                            ]
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "text": [
+                            "cmd.uploader(key,uploader)"
+                        ],
+                        "collect": {
+                            "key": "file4",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "מה יש בקובץ ששלחתם?"
+                        ],
+                        "collect": {
+                            "key": "file4description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "text": [
+                            "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
+                        ],
+                        "collect": {
+                            "key": "_more_contact_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "repeat"
+                                },
+                                {
+                                    "pattern": "true",
+                                    "type": "string",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "false",
+                                    "type": "string",
+                                    "action": "סיום שיחה"
+                                }
+                            ]
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "text": [
+                            "cmd.uploader(key,uploader)"
+                        ],
+                        "collect": {
+                            "key": "file5",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "מה יש בקובץ ששלחתם?"
+                        ],
+                        "collect": {
+                            "key": "file5description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "סיום שיחה"
                     }
                 ]
             },
             {
-                "topic": "משטרה: התנהגות או התבטאות גזענית מצד שוטר/ת",
+                "topic": "משטרה: בקשה לתיאור המקרה",
                 "script": [
                     {
                         "text": [
-                            "תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):"
+                            "תאר/י בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):"
                         ],
                         "collect": {
                             "key": "event_description",
@@ -611,6 +915,11 @@
                         }
                     },
                     {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
                         "action": "העלאת קבצים: האם להעלות קובץ נוסף?"
                     }
                 ]
@@ -619,26 +928,6 @@
                 "topic": "העלאת קבצים: האם להעלות קובץ נוסף?",
                 "script": [
                     {
-                        "text": [
-                            "cmd.FilesUploadedCount()"
-                        ],
-                        "collect": {
-                            "key": "files_count",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "סיום שיחה"
-                                },
-                                {
-                                    "pattern": "[0-5]",
-                                    "type": "regex",
-                                    "action": "next"
-                                }
-                            ]
-                        }
-                    },
-                    {
                         "action": "complete"
                     },
                     {
@@ -646,20 +935,32 @@
                             "האם יש בידיך צילומים, מסמכים או תיעוד של המקרה שתוכל/י להעביר כעת?"
                         ],
                         "collect": {
-                            "key": "upload_file",
+                            "key": "_upload_file",
                             "options": [
                                 {
                                     "default": true,
                                     "pattern": "default",
-                                    "action": "סיום שיחה"
+                                    "action": "repeat"
                                 },
                                 {
                                     "pattern": "true",
                                     "type": "string",
-                                    "action": "העלאת קובץ: בחירת קובץ ותיאור"
+                                    "action": "העלאת קבצים: בחירת קובץ ותיאור *5"
                                 }
                             ]
-                        }
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ]
                     }
                 ]
             },
@@ -924,55 +1225,6 @@
                 ]
             },
             {
-                "topic": "משטרה: פרופיילינג – הפעלת סמכות משטרתית על בסיס מראה, צבע עור וכדומה",
-                "script": [
-                    {
-                        "text": [
-                            "event_description"
-                        ],
-                        "meta": [],
-                        "collect": {
-                            "key": "event_description",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                }
-                            ],
-                            "multiple": true
-                        }
-                    },
-                    {
-                        "action": "העלאת קבצים: האם להעלות קובץ נוסף?"
-                    }
-                ]
-            },
-            {
-                "topic": "משטרה: אחר",
-                "script": [
-                    {
-                        "text": [
-                            "תאר בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):"
-                        ],
-                        "collect": {
-                            "key": "event_description",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                }
-                            ],
-                            "multiple": true
-                        }
-                    },
-                    {
-                        "action": "העלאת קבצים: האם להעלות קובץ נוסף?"
-                    }
-                ]
-            },
-            {
                 "topic": "דיור: הפליה בקבלה לישוב",
                 "script": [
                     {
@@ -1149,6 +1401,81 @@
             }
         ],
         "variables": [
+            {
+                "name": "_upload_file",
+                "type": "string",
+                "id": 469
+            },
+            {
+                "name": "file5description",
+                "type": "string",
+                "id": 134
+            },
+            {
+                "name": "file5",
+                "type": "string",
+                "id": 39
+            },
+            {
+                "name": "file4description",
+                "type": "string",
+                "id": 317
+            },
+            {
+                "name": "file4",
+                "type": "string",
+                "id": 379
+            },
+            {
+                "name": "file3description",
+                "type": "string",
+                "id": 336
+            },
+            {
+                "name": "file3",
+                "type": "string",
+                "id": 205
+            },
+            {
+                "name": "file2description",
+                "type": "string",
+                "id": 113
+            },
+            {
+                "name": "file2",
+                "type": "string",
+                "id": 157
+            },
+            {
+                "name": "_more_upload",
+                "type": "string",
+                "id": 72
+            },
+            {
+                "name": "file1description",
+                "type": "string",
+                "id": 184
+            },
+            {
+                "name": "file1",
+                "type": "string",
+                "id": 144
+            },
+            {
+                "name": "_more_contact_details",
+                "type": "string",
+                "id": 76
+            },
+            {
+                "name": "_contact_method",
+                "type": "string",
+                "id": 277
+            },
+            {
+                "name": "_is_working_time",
+                "type": "string",
+                "id": 130
+            },
             {
                 "name": "agent_link",
                 "type": "string",
