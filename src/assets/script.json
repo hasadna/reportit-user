@@ -381,39 +381,24 @@
                                 {
                                     "default": true,
                                     "pattern": "default",
-                                    "action": "repeat"
+                                    "action": "next"
                                 },
                                 {
                                     "pattern": "הפליה בקבלה לישוב",
                                     "type": "string",
-                                    "action": "דיור: הפליה בקבלה לישוב"
-                                },
-                                {
-                                    "pattern": "הפליה במכירת דירה",
-                                    "type": "string",
-                                    "action": "דיור: הפליה במכירת דירה"
-                                },
-                                {
-                                    "pattern": "הפליה בהשכרת דירה מחברה",
-                                    "type": "string",
-                                    "action": "דיור: הפליה בהשכרת דירה מחברה"
-                                },
-                                {
-                                    "pattern": "הפליה בהשכרת דירה מאדם פרטי",
-                                    "type": "string",
-                                    "action": "דיור: הפליה בהשכרת דירה מאדם פרטי"
-                                },
-                                {
-                                    "pattern": "אחר",
-                                    "type": "string",
-                                    "action": "דיור: אחר"
+                                    "action": "דיור: בירור סוג הישוב"
                                 }
                             ],
                             "multiple": true
                         }
                     },
                     {
-                        "action": "complete"
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "דיור: בירור מיקום האירוע"
                     }
                 ]
             },
@@ -920,12 +905,12 @@
                         ]
                     },
                     {
-                        "action": "העלאת קבצים: האם להעלות קובץ נוסף?"
+                        "action": "העלאת קבצים: האם להעלות קבצים?"
                     }
                 ]
             },
             {
-                "topic": "העלאת קבצים: האם להעלות קובץ נוסף?",
+                "topic": "העלאת קבצים: האם להעלות קבצים?",
                 "script": [
                     {
                         "action": "complete"
@@ -1013,7 +998,7 @@
                 "script": [
                     {
                         "text": [
-                            "לאיזה תחום קשור האירוע? מי נהג כלפיך בגזענות או באופן מפלה?"
+                            "לאיזה נושא קשור האירוע? מי נהג כלפיך בגזענות או באופן מפלה?"
                         ],
                         "quick_replies": [
                             {
@@ -1032,7 +1017,7 @@
                                 "content_type": "text"
                             },
                             {
-                                "title": "תחום הדיור",
+                                "title": "תחום המגורים והדיור",
                                 "payload": "דיור",
                                 "content_type": "text"
                             },
@@ -1106,11 +1091,6 @@
                 "script": [
                     {
                         "text": [
-                            "This is offender pollice"
-                        ]
-                    },
-                    {
-                        "text": [
                             "מהו סוג האירוע עליו תרצו לדווח?"
                         ],
                         "quick_replies": [
@@ -1141,99 +1121,80 @@
                                 {
                                     "default": true,
                                     "pattern": "default",
-                                    "action": "repeat"
-                                },
-                                {
-                                    "pattern": "בידוק מפלה",
-                                    "type": "string",
-                                    "action": "מאבטח/ת: בידוק מפלה"
-                                },
-                                {
-                                    "pattern": "אמירות גזעניות",
-                                    "type": "string",
-                                    "action": "מאבטח/ת: אמירות גזעניות"
-                                },
-                                {
-                                    "pattern": "מניעת כניסה",
-                                    "type": "string",
-                                    "action": "מאבטח/ת: מניעת כניסה"
-                                },
-                                {
-                                    "pattern": "אחר",
-                                    "type": "string",
-                                    "action": "מאבטח/ת: אחר"
+                                    "action": "next"
                                 }
                             ],
                             "multiple": false
                         }
                     },
                     {
-                        "action": "complete"
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "מאבטח/ת: בירור שם חברת האבטחה"
                     }
                 ]
             },
             {
-                "topic": "מאבטח/ת: בידוק מפלה",
+                "topic": "מאבטח/ת: בירור שם חברת האבטחה",
                 "script": [
                     {
                         "text": [
-                            "This is מאבטח/ת: בידוק מפלה"
-                        ]
+                            "האם ידוע לך שמה של חברת האבטחה?"
+                        ],
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ],
+                        "meta": [],
+                        "collect": {
+                            "key": "_add_offender_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "מאבטח/ת: בירור שם המאבטח/ת"
+                                },
+                                {
+                                    "pattern": "true",
+                                    "type": "string",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "מאבטח/ת: אמירות גזעניות",
-                "script": [
                     {
                         "text": [
-                            "This is מאבטח/ת: אמירות גזעניות"
-                        ]
+                            "מה שמה של חברת האבטחה?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "מאבטח/ת: מניעת כניסה",
-                "script": [
                     {
                         "text": [
-                            "This is מאבטח/ת: מניעת רניסה"
+                            "cmd.saveUser(record)"
                         ]
                     },
                     {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "מאבטח/ת: אחר",
-                "script": [
-                    {
-                        "text": [
-                            "This is מאבטח/ת: אחר"
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "דיור: הפליה בקבלה לישוב",
-                "script": [
-                    {
-                        "text": [
-                            "This is דיור: הפליה בקבלה לישוב"
-                        ]
-                    },
-                    {
-                        "action": "complete"
+                        "action": "מאבטח/ת: בירור שם המאבטח/ת"
                     }
                 ]
             },
@@ -1392,6 +1353,288 @@
                         "action": "complete"
                     }
                 ]
+            },
+            {
+                "topic": "מאבטח/ת: בירור שם המאבטח/ת",
+                "script": [
+                    {
+                        "text": [
+                            "האם ידוע לך השם של המאבטח/ת?"
+                        ],
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ],
+                        "meta": [],
+                        "collect": {
+                            "key": "_add_offender_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "מאבטח/ת: בירור מיקום האירוע"
+                                },
+                                {
+                                    "pattern": "true",
+                                    "type": "string",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "מה השם והפרטים הידועים לך לגבי המאבטח/ת?"
+                        ],
+                        "collect": {
+                            "key": "offender_person_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "action": "מאבטח/ת: בירור מיקום האירוע"
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    }
+                ]
+            },
+            {
+                "topic": "מאבטח/ת: בירור מיקום האירוע",
+                "script": [
+                    {
+                        "text": [
+                            "היכן התרחש האירוע?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "מאבטח/ת: בקשה לתיאור המקרה"
+                                },
+                                {
+                                    "pattern": "אחר",
+                                    "type": "string",
+                                    "action": "repeat"
+                                }
+                            ]
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "קניון",
+                                "payload": "קניון",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "משרד ממשלתי",
+                                "payload": "משרד ממשלתי",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "תחבורה ציבורית (למשל, אוטובוס, מונית או תחבורה ציבורית)",
+                                "payload": "תחבורה ציבורית",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "בית חולים",
+                                "payload": "בית חולים",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "מועדון",
+                                "payload": "מועדון",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "נתב\"ג",
+                                "payload": "נתב\"ג",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "אחר",
+                                "payload": "אחר",
+                                "content_type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "text": [
+                            "היכן התרחש האירוע?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "action": "מאבטח/ת: בקשה לתיאור המקרה"
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    }
+                ]
+            },
+            {
+                "topic": "מאבטח/ת: בקשה לתיאור המקרה",
+                "script": [
+                    {
+                        "text": [
+                            "תאר/י בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):"
+                        ],
+                        "meta": [],
+                        "collect": {
+                            "key": "event_description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "העלאת קבצים: האם להעלות קבצים?"
+                    }
+                ]
+            },
+            {
+                "topic": "דיור: בירור סוג הישוב",
+                "script": [
+                    {
+                        "text": [
+                            "מהו סוג הישוב שקשור לאירוע?"
+                        ],
+                        "collect": {
+                            "key": "complaint_type",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        },
+                        "quick_replies": [
+                            {
+                                "title": "ישוב קהילתי",
+                                "payload": "הפליה בקבלה לישוב קהילתי",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "שכונת הרחבה במושב או בקיבוץ",
+                                "payload": "הפליה בקבלה לשכונת הרחבה במושב או בקיבוץ",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "נחלה בקיבוץ או במושב",
+                                "payload": "הפליה בקבלה לנחלה בקיבוץ או במושב",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "אחר",
+                                "payload": "הפליה בקבלה לישוב מסוג לא מוגדר",
+                                "content_type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "דיור: בירור מיקום האירוע"
+                    }
+                ]
+            },
+            {
+                "topic": "דיור: בירור מיקום האירוע",
+                "script": [
+                    {
+                        "text": [
+                            "היכן התרחש האירוע?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "action": "דיור: בקשה לתיאור המקרה"
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    }
+                ]
+            },
+            {
+                "topic": "דיור: בקשה לתיאור המקרה",
+                "script": [
+                    {
+                        "text": [
+                            "אנא תאר/י את המקרה, עם כמה שיותר פרטים"
+                        ],
+                        "collect": {
+                            "key": "event_description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ],
+                            "multiple": true
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "העלאת קבצים: האם להעלות קבצים?"
+                    }
+                ]
             }
         ],
         "triggers": [
@@ -1401,6 +1644,31 @@
             }
         ],
         "variables": [
+            {
+                "name": "event_location",
+                "type": "string",
+                "id": 75
+            },
+            {
+                "name": "offender_organization_details",
+                "type": "string",
+                "id": 215
+            },
+            {
+                "name": "offender_person_details",
+                "type": "string",
+                "id": 281
+            },
+            {
+                "name": "offender_organization",
+                "type": "string",
+                "id": 118
+            },
+            {
+                "name": "_add_offender_details",
+                "type": "string",
+                "id": 390
+            },
             {
                 "name": "_upload_file",
                 "type": "string",
