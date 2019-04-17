@@ -68,15 +68,15 @@ export class AppComponent implements OnInit {
             3: {'start': '09:00',       // Wednesday
                 'end': '16:00'},
             4: {'start': '09:00',      // Thursday
-                'end': '16:00'},
+                'end': '16:00'}
           };
-
           if (dayOfTheWeek in workTimes) {
             const [dayStartHour, dayStartMinute] = workTimes[dayOfTheWeek]['start'].split(':');
             const [dayEndtHour, dayEndMinute] = workTimes[dayOfTheWeek]['end'].split(':');
+            console.log(currentMinute <= dayEndMinute);
             if (
-                (currentHour >= dayStartHour && currentMinute >= dayStartMinute) &&
-                (currentHour <= dayEndtHour && currentMinute <= dayEndMinute)
+                (currentHour > dayStartHour || (currentHour === dayStartHour && currentMinute >= dayStartMinute)) &&
+                (currentHour < dayEndtHour || (currentHour === dayEndtHour && currentMinute <= dayEndMinute))
               ) {
                 return 'true';
               } else {
@@ -102,6 +102,9 @@ export class AppComponent implements OnInit {
               (success) => { uploader.success = success; }
           );
           return uploaded;
+        },
+        addTextToField: async (record) => {
+          return `${record.event_description} \n \n מידע נוסף:\n ${record._add_more_data}`;
         }
       },
       (key, value) => {}
