@@ -55,7 +55,7 @@
                 "script": [
                     {
                         "text": [
-                            "לפני שנעביר את הפניה שלך לכונן, נבקש ממך לענות על כמה שאלות, שיסייעו לנו להשיב במהירות."
+                            "לפני שנעביר את הפניה שלך למוקדנ/ית, נבקש ממך לענות על כמה שאלות, שיסייעו לנו להשיב במהירות."
                         ]
                     },
                     {
@@ -180,7 +180,7 @@
                 "script": [
                     {
                         "text": [
-                            "האם ישנם פרטי התקשרות נוספים שתוכלו למסור כדי שנוכל ליצור אתכם קשר?"
+                            "האם תרצה/תרצי שננסה ליצור אתכם קשר באמצעי קשר נוספים?"
                         ],
                         "collect": {
                             "key": "_more_contact_details",
@@ -224,6 +224,11 @@
             {
                 "topic": "פרטי התקשרות: בחירת אמצעי יצירת קשר",
                 "script": [
+                    {
+                        "text": [
+                            "כדי שנוכל לטפל בפניה אנו זקוקים לפרטי התקשרות. לא ייעשה בפרטים אלו כל שימוש חוץ מטיפול בתלונה בדרך שבה תאשר/י לנו."
+                        ]
+                    },
                     {
                         "text": [
                             "איך תרצה/תרצי שניצור איתך קשר בהמשך התהליך?"
@@ -291,7 +296,7 @@
                 "script": [
                     {
                         "text": [
-                            "מהו סוג האירוע עליו תרצו לדווח?"
+                            "מהו סוג האירוע עליו תרצה/תרצי לדווח?"
                         ],
                         "quick_replies": [
                             {
@@ -464,7 +469,7 @@
                             }
                         ],
                         "collect": {
-                            "key": "offender_details",
+                            "key": "offender_organization_category",
                             "options": [
                                 {
                                     "default": true,
@@ -492,7 +497,7 @@
                                     "action": "חינוך: גן טרום חובה"
                                 },
                                 {
-                                    "pattern": "חינוך: גן טרום טרום חובה",
+                                    "pattern": "גן טרום טרום חובה",
                                     "type": "string",
                                     "action": "חינוך: גן טרום טרום חובה"
                                 },
@@ -509,7 +514,7 @@
                                 {
                                     "pattern": "אחר",
                                     "type": "string",
-                                    "action": "אחר: חינוך"
+                                    "action": "חינוך: אחר"
                                 }
                             ]
                         }
@@ -548,6 +553,11 @@
                 "script": [
                     {
                         "text": [
+                            "ניתן להעלות עד חמישה קבצים."
+                        ]
+                    },
+                    {
+                        "text": [
                             "cmd.uploader(key,uploader)"
                         ],
                         "collect": {
@@ -583,6 +593,11 @@
                     },
                     {
                         "text": [
+                            "ניתן להעלות עוד ארבעה קבצים."
+                        ]
+                    },
+                    {
+                        "text": [
                             "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
                         ],
                         "collect": {
@@ -601,7 +616,7 @@
                                 {
                                     "pattern": "false",
                                     "type": "string",
-                                    "action": "סיום שיחה"
+                                    "action": "תלונה: הוספת מידע נוסף"
                                 }
                             ]
                         },
@@ -655,6 +670,11 @@
                     },
                     {
                         "text": [
+                            "ניתן להעלות עוד שלושה קבצים."
+                        ]
+                    },
+                    {
+                        "text": [
                             "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
                         ],
                         "collect": {
@@ -673,7 +693,7 @@
                                 {
                                     "pattern": "false",
                                     "type": "string",
-                                    "action": "סיום שיחה"
+                                    "action": "תלונה: הוספת מידע נוסף"
                                 }
                             ]
                         },
@@ -733,6 +753,11 @@
                     },
                     {
                         "text": [
+                            "ניתן להעלות עוד שני קבצים."
+                        ]
+                    },
+                    {
+                        "text": [
                             "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
                         ],
                         "collect": {
@@ -751,7 +776,7 @@
                                 {
                                     "pattern": "false",
                                     "type": "string",
-                                    "action": "סיום שיחה"
+                                    "action": "תלונה: הוספת מידע נוסף"
                                 }
                             ]
                         },
@@ -805,6 +830,11 @@
                     },
                     {
                         "text": [
+                            "ניתן להעלות עוד קובץ אחד."
+                        ]
+                    },
+                    {
+                        "text": [
                             "האם יש בידיך צילומים, מסמכים או תיעוד נוסף שתרצה/תרצי לשלוח כעת?"
                         ],
                         "collect": {
@@ -823,7 +853,7 @@
                                 {
                                     "pattern": "false",
                                     "type": "string",
-                                    "action": "סיום שיחה"
+                                    "action": "תלונה: הוספת מידע נוסף"
                                 }
                             ]
                         },
@@ -876,7 +906,7 @@
                         ]
                     },
                     {
-                        "action": "סיום שיחה"
+                        "action": "תלונה: הוספת מידע נוסף"
                     }
                 ]
             },
@@ -913,7 +943,7 @@
                 "topic": "העלאת קבצים: האם להעלות קבצים?",
                 "script": [
                     {
-                        "action": "complete"
+                        "action": "תלונה: הוספת מידע נוסף"
                     },
                     {
                         "text": [
@@ -925,7 +955,7 @@
                                 {
                                     "default": true,
                                     "pattern": "default",
-                                    "action": "repeat"
+                                    "action": "תלונה: הוספת מידע נוסף"
                                 },
                                 {
                                     "pattern": "true",
@@ -954,7 +984,7 @@
                 "script": [
                     {
                         "text": [
-                            "כדי שנוכל לטפל בפניה אנו זקוקים לפרטי התקשרות. לא ייעשה בפרטים אלו כל שימוש חוץ מטיפול בתלונה בדרך שבה תאשר/י לנו.\n<br><br>\nמה השם שלך? אם את/ה רוצ/ה להישאר אנונימי/ת בשלב זה כתבו \"אנונימי\""
+                            "מה השם שלך? אם את/ה רוצ/ה להישאר אנונימי/ת בשלב זה כתבו \"אנונימי\""
                         ],
                         "meta": [],
                         "collect": {
@@ -985,11 +1015,6 @@
                                 }
                             ]
                         }
-                    },
-                    {
-                        "text": [
-                            "הנה הקישור: {{agent_link}}"
-                        ]
                     }
                 ]
             },
@@ -998,7 +1023,7 @@
                 "script": [
                     {
                         "text": [
-                            "לאיזה נושא קשור האירוע? מי נהג כלפיך בגזענות או באופן מפלה?"
+                            "מי נהג כלפיך בגזענות או באופן מפלה? או לאיזה תחום קשור האירוע?"
                         ],
                         "quick_replies": [
                             {
@@ -1079,6 +1104,11 @@
                     {
                         "text": [
                             "יש לכם משוב או הצעה לשיפור על השיחה הזו?       <a href=\"https://forms.gle/BBdqGcXbFCuHkh7V8\" target=\"_blank\">לחצו כאן</a>"
+                        ]
+                    },
+                    {
+                        "text": [
+                            "הנה הקישור: {{agent_link}}"
                         ]
                     },
                     {
@@ -1199,67 +1229,30 @@
                 ]
             },
             {
-                "topic": "דיור: הפליה במכירת דירה",
-                "script": [
-                    {
-                        "text": [
-                            "This is דיור: הפליה במכירת דירה"
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "דיור: הפליה בהשכרת דירה מחברה",
-                "script": [
-                    {
-                        "text": [
-                            "This is דיור: הפליה בהשכרת דירה מחברה"
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "דיור: הפליה בהשכרת דירה מאדם פרטי",
-                "script": [
-                    {
-                        "text": [
-                            "This is דיור: הפליה בהשכרת דירה מאדם פרטי"
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
-                "topic": "דיור: אחר",
-                "script": [
-                    {
-                        "text": [
-                            "This is דיור: אחר"
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ]
-            },
-            {
                 "topic": "חינוך: אוניברסיטה/מכללה",
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: אוניברסיטה/מכללה"
+                            "מהו שם המוסד/המכללה?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
                         ]
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בירור הרקע להפליה"
                     }
                 ]
             },
@@ -1268,11 +1261,21 @@
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: בית ספר"
-                        ]
+                            "מה שם בית הספר?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בחירת זרם חינוכי של המסגרת"
                     }
                 ]
             },
@@ -1281,11 +1284,21 @@
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: גן חובה"
-                        ]
+                            "מה שם הגן?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בחירת זרם חינוכי של המסגרת"
                     }
                 ]
             },
@@ -1294,11 +1307,21 @@
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: גן טרום חובה"
-                        ]
+                            "מה שם הגן?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בחירת זרם חינוכי של המסגרת"
                     }
                 ]
             },
@@ -1307,11 +1330,21 @@
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: גן טרום טרום חובה"
-                        ]
+                            "מה שם הגן?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בחירת זרם חינוכי של המסגרת"
                     }
                 ]
             },
@@ -1320,11 +1353,21 @@
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: גן פרטי לגיל הרך"
-                        ]
+                            "מה שם הגן?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בירור הרקע להפליה"
                     }
                 ]
             },
@@ -1333,24 +1376,29 @@
                 "script": [
                     {
                         "text": [
-                            "This is חינוך: חוגים של רשות מקומית"
-                        ]
+                            "היכן או באיזו מסגרת התקיים החוג?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization_details",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
                     },
                     {
-                        "action": "complete"
+                        "action": "חינוך: בירור הרקע להפליה"
                     }
                 ]
             },
             {
-                "topic": "אחר: חינוך",
+                "topic": "חינוך: אחר",
                 "script": [
                     {
-                        "text": [
-                            "This is אחר: חינוך"
-                        ]
-                    },
-                    {
-                        "action": "complete"
+                        "action": "חינוך: בירור הרקע להפליה"
                     }
                 ]
             },
@@ -1505,7 +1553,7 @@
                 "script": [
                     {
                         "text": [
-                            "תאר/י בפירוט את האירוע שהתרחש (כולל מקום, תאריך, פרטי השוטר):"
+                            "תאר/י בפירוט את האירוע שהתרחש (כולל מקום, תאריך וכל מידע רלוונטי אחר)"
                         ],
                         "meta": [],
                         "collect": {
@@ -1635,6 +1683,238 @@
                         "action": "העלאת קבצים: האם להעלות קבצים?"
                     }
                 ]
+            },
+            {
+                "topic": "תלונה: הוספת מידע נוסף",
+                "script": [
+                    {
+                        "text": [
+                            "תודה. קיבלנו ושמרנו את כל התשובות שלך. לפני שנסיים, האם ישנו מידע נוסף שתרצה/תרצי להוסיף?"
+                        ],
+                        "quick_replies": [
+                            {
+                                "title": "כן",
+                                "payload": "true",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "לא",
+                                "payload": "false",
+                                "content_type": "text"
+                            }
+                        ],
+                        "meta": [],
+                        "collect": {
+                            "key": "_add_more_data",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "false",
+                                    "type": "string",
+                                    "action": "סיום שיחה"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "מהו המידע או הפרטים הנוספים שתרצה/תרצי להוסיף?"
+                        ],
+                        "collect": {
+                            "key": "_add_more_data",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ],
+                            "multiple": true
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.addTextToField(record)"
+                        ],
+                        "collect": {
+                            "key": "event_description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "סיום שיחה"
+                    }
+                ]
+            },
+            {
+                "topic": "חינוך: בירור הרקע להפליה",
+                "script": [
+                    {
+                        "text": [
+                            "על איזה רקע, לדעתך, הופלית או נהגו כלפיך בגזענות"
+                        ],
+                        "quick_replies": [
+                            {
+                                "title": "מוצא, עדה או לאום, או צבע עור",
+                                "payload": "אפליה על רקע מוצא, עדה או לאום, או צבע עור",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "על רקע דת",
+                                "payload": "אפליה על רקע דת",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "על רקע מין, נטייה מינית או זהות מגדרית",
+                                "payload": "אפליה על רקע מין, נטייה מינית או זהות מגדרית",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "על רקע אחר",
+                                "payload": "אחר",
+                                "content_type": "text"
+                            }
+                        ],
+                        "meta": [],
+                        "collect": {
+                            "key": "complaint_type",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "חינוך: בקשה לתיאור המקרה"
+                                },
+                                {
+                                    "pattern": "אחר",
+                                    "type": "string",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "על איזה רקע את/ה חושב/ת שהופלית?"
+                        ],
+                        "collect": {
+                            "key": "complaint_type",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "חינוך: בקשה לתיאור המקרה"
+                    }
+                ]
+            },
+            {
+                "topic": "חינוך: בקשה לתיאור המקרה",
+                "script": [
+                    {
+                        "text": [
+                            "אנא תאר/י את המקרה, עם כמה שיותר פרטים"
+                        ],
+                        "collect": {
+                            "key": "event_description",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ],
+                            "multiple": true
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "העלאת קבצים: האם להעלות קבצים?"
+                    }
+                ]
+            },
+            {
+                "topic": "חינוך: בחירת זרם חינוכי של המסגרת",
+                "script": [
+                    {
+                        "text": [
+                            "באיזה זרם חינוכי מדובר?"
+                        ],
+                        "quick_replies": [
+                            {
+                                "title": "חינוך ממלכתי",
+                                "payload": "חינוך ממלכתי",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "חינוך ממלכתי-דתי",
+                                "payload": "חינוך ממלכתי דתי",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "חינוך חרדי",
+                                "payload": "חינוך חרדי",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "חינוך מיוחד",
+                                "payload": "חינוך מיוחד",
+                                "content_type": "text"
+                            },
+                            {
+                                "title": "אחר",
+                                "payload": "אחר",
+                                "content_type": "text"
+                            }
+                        ],
+                        "collect": {
+                            "key": "offender_organization_category",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
+                        "action": "חינוך: בירור הרקע להפליה"
+                    }
+                ]
             }
         ],
         "triggers": [
@@ -1644,6 +1924,16 @@
             }
         ],
         "variables": [
+            {
+                "name": "offender_organization_category",
+                "type": "string",
+                "id": 331
+            },
+            {
+                "name": "_add_more_data",
+                "type": "string",
+                "id": 491
+            },
             {
                 "name": "event_location",
                 "type": "string",
