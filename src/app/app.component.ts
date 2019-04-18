@@ -30,9 +30,9 @@ export class AppComponent implements OnInit {
     // - Done: Fix the isWorkingHours function
     // - Done Call the createUser(context, record) at some point in the script
     //   Record the result of this command in the 'agent_link' field
-    // - Call updateUser(record) at selected points in the code.
+    // - Done Call updateUser(record) at selected points in the code.
     // - Go over the original flow and make sure all fields were migrated correctly to the script
-    // - For uploading files call 'upload(key, uploader)' - it will return the link to the uploaded file
+    // - Done For uploading files call 'upload(key, uploader)' - it will return the link to the uploaded file
 
 
     const recordKeysToSave = (record) => {
@@ -68,15 +68,15 @@ export class AppComponent implements OnInit {
             3: {'start': '09:00',       // Wednesday
                 'end': '16:00'},
             4: {'start': '09:00',      // Thursday
-                'end': '16:00'},
+                'end': '16:00'}
           };
-
           if (dayOfTheWeek in workTimes) {
             const [dayStartHour, dayStartMinute] = workTimes[dayOfTheWeek]['start'].split(':');
             const [dayEndtHour, dayEndMinute] = workTimes[dayOfTheWeek]['end'].split(':');
+            console.log(currentMinute <= dayEndMinute);
             if (
-                (currentHour >= dayStartHour && currentMinute >= dayStartMinute) &&
-                (currentHour <= dayEndtHour && currentMinute <= dayEndMinute)
+                (currentHour > dayStartHour || (currentHour === dayStartHour && currentMinute >= dayStartMinute)) &&
+                (currentHour < dayEndtHour || (currentHour === dayEndtHour && currentMinute <= dayEndMinute))
               ) {
                 return 'true';
               } else {
@@ -102,6 +102,9 @@ export class AppComponent implements OnInit {
               (success) => { uploader.success = success; }
           );
           return uploaded;
+        },
+        addTextToField: async (record) => {
+          return `${record.event_description} \n \n מידע נוסף:\n ${record._add_more_data}`;
         }
       },
       (key, value) => {}
