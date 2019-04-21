@@ -1564,7 +1564,8 @@
                                     "pattern": "default",
                                     "action": "next"
                                 }
-                            ]
+                            ],
+                            "multiple": true
                         }
                     },
                     {
