@@ -370,6 +370,11 @@
                                 "content_type": "text"
                             },
                             {
+                                "title": "אפליה בהשכרת דירה מחברה, קבלן או יזם",
+                                "payload": "אפליה בהשכרת דירה מחברה, קבלן או יזם",
+                                "content_type": "text"
+                            },
+                            {
                                 "title": "אחר",
                                 "payload": "אחר",
                                 "content_type": "text"
