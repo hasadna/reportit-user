@@ -105,6 +105,9 @@ export class AppComponent implements OnInit {
         },
         addTextToField: async (record) => {
           return `${record.event_description} \n \n מידע נוסף:\n ${record._add_more_data}`;
+        },
+        offenderIsRealEstateCompany: async (record) => {
+          record.offender_organization_category = 'חברת תיווך';
         }
       },
       (key, value) => {}
