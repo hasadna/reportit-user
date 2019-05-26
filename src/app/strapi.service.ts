@@ -4,59 +4,33 @@ import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/c
 @Injectable({
   providedIn: 'root'
 })
-export class HubspotService {
+export class StrapiService {
 
-  CONTACT_URL = 'https://reportit.obudget.org/hubspot/contacts/v1/contact/';
-  CONTACT_UPDATE_URL = 'https://reportit.obudget.org/hubspot/contacts/v1/contact/vid/:vid/profile';
-  CONTACT_GET_URL = 'https://reportit.obudget.org/hubspot/contacts/v1/contact/vid/:vid/profile';
-  FILE_UPLOAD = 'https://reportit.obudget.org/hubspot/filemanager/api/v2/files';
-  vid: any = null;
+  CREATE_REPORT_URL = 'https://reportit-cms.obudget.org/reports';
+  UPDATE_REPORT_URL = 'https://reportit-cms.obudget.org/reports/:report_id';
+  FILE_UPLOAD = 'https://reportit-cms.obudget.org/upload/';
+  report_id: any = null;
 
   constructor(private http: HttpClient) { }
 
-  createUser(data: any) {
-    const properties = Object.entries(data)
-      .map(value => {
-        return {property: value[0], value: value[1]};
-      });
-    const body = {properties};
-    console.log('create', body);
+  createReport(data: any) {
     return new Promise((resolve, _) => {
-      this.http.post(this.CONTACT_URL, body)
+      this.http.post(this.CREATE_REPORT_URL, data)
           .subscribe((response: any) => {
             console.log('create user got', response);
-            this.vid = response.vid;
-            resolve(this.vid);
+            this.report_id = response.id;
+            resolve(this.report_id);
           });
     });
   }
 
-  updateUser(data: any) {
-    const properties = Object.entries(data)
-      .map(value => {
-        return {property: value[0], value: value[1]};
-      });
-    const body = {properties};
-    console.log('update', body);
+  updateReport(data: any) {
+    console.log('update', data);
     return new Promise((resolve, _) => {
-      this.http.post(this.CONTACT_UPDATE_URL.replace(':vid', this.vid), body)
+      this.http.put(this.UPDATE_REPORT_URL.replace(':report_id', this.report_id), data)
           .subscribe(() => {
             console.log('updated user');
             resolve();
-          });
-    });
-  }
-
-  getUser(vid: any) {
-    return new Promise((resolve, _) => {
-      this.http.get(this.CONTACT_GET_URL.replace(':vid', vid))
-          .subscribe((response: any) => {
-            const properties = response.properties;
-            const ret = {};
-            for (const key of Object.keys(properties)) {
-              ret[key] = properties[key].value;
-            }
-            resolve(ret);
           });
     });
   }
@@ -65,7 +39,10 @@ export class HubspotService {
     return new Promise((resolve, _) => {
       const formData: FormData = new FormData();
       formData.append('files', file, file.name);
-      formData.append('folder_paths', path);
+      formData.append('path', path);
+      formData.append('refId', this.report_id);
+      formData.append('ref', 'report');
+      formData.append('field', 'evidence_files');
 
       // create a http-post request and pass the form
       // tell it to report the upload progress
@@ -89,7 +66,7 @@ export class HubspotService {
           // The upload is complete
           success(true);
           console.log(event.body);
-          resolve(event.body['objects'][0]['url']);
+          resolve(event.body);
         }
       });
     });

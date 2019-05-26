@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HubspotService } from './hubspot.service';
+import { StrapiService } from './strapi.service';
 
-describe('HubspotService', () => {
+describe('StrapiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HubspotService = TestBed.get(HubspotService);
+    const service: StrapiService = TestBed.get(StrapiService);
     expect(service).toBeTruthy();
   });
 });

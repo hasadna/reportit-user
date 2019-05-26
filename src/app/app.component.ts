@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScriptRunnerService, ContentService } from 'hatool';
-import { HubspotService } from './hubspot.service';
+import { StrapiService } from './strapi.service';
 import { FileUploader } from 'hatool';
 import { async } from '@angular/core/testing';
 
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   constructor(private runner: ScriptRunnerService,
               private content: ContentService,
-              private hubspot: HubspotService) {}
+              private strapi: StrapiService) {}
 
   ngOnInit() {
     this.content.sendButtonText = '';
@@ -86,18 +86,18 @@ export class AppComponent implements OnInit {
         },
         createUser: async (context, record) => {
           const recordToSave = recordKeysToSave(record);
-          const vid = await this.hubspot.createUser(recordToSave);
+          const vid = await this.strapi.createReport(recordToSave);
           context.vid = vid;
           return `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
         },
         saveUser: async (record) => {
           const recordToSave = recordKeysToSave(record);
-          await this.hubspot.updateUser(recordToSave);
+          await this.strapi.updateReport(recordToSave);
         },
         uploader: async (key, uploader: FileUploader) => {
           uploader.active = true;
-          const uploaded = await this.hubspot.uploadFile(
-            uploader.selectedFile, this.hubspot.vid + '/' + key,
+          const uploaded = await this.strapi.uploadFile(
+            uploader.selectedFile, this.strapi.report_id + '/' + key,
               (progress) => { uploader.progress = progress; },
               (success) => { uploader.success = success; }
           );
