@@ -42,7 +42,7 @@
                 "script": [
                     {
                         "text": [
-                            "המוקדנים שלנו עובדים בימים א-ה בשעות 9:00 עד 17:00. כדי שנוכל לחזור אליך במהירות נבקש ממך לענות לנו על כמה שאלות"
+                            "המוקדנים שלנו עובדים בימים א-ה בשעות 9:00 עד 16:00. כדי שנוכל לחזור אליך במהירות נבקש ממך לענות לנו על כמה שאלות"
                         ]
                     },
                     {
@@ -571,7 +571,7 @@
                             "cmd.uploader(key,uploader)"
                         ],
                         "collect": {
-                            "key": "file1",
+                            "key": "_file1",
                             "options": [
                                 {
                                     "default": true,
@@ -648,7 +648,7 @@
                             "cmd.uploader(key,uploader)"
                         ],
                         "collect": {
-                            "key": "file2",
+                            "key": "_file2",
                             "options": [
                                 {
                                     "default": true,
@@ -731,7 +731,7 @@
                         ],
                         "meta": [],
                         "collect": {
-                            "key": "file3",
+                            "key": "_file3",
                             "options": [
                                 {
                                     "default": true,
@@ -808,7 +808,7 @@
                             "cmd.uploader(key,uploader)"
                         ],
                         "collect": {
-                            "key": "file4",
+                            "key": "_file4",
                             "options": [
                                 {
                                     "default": true,
@@ -885,7 +885,7 @@
                             "cmd.uploader(key,uploader)"
                         ],
                         "collect": {
-                            "key": "file5",
+                            "key": "_file5",
                             "options": [
                                 {
                                     "default": true,
@@ -2550,7 +2550,7 @@
                 "id": 134
             },
             {
-                "name": "file5",
+                "name": "_file5",
                 "type": "string",
                 "id": 39
             },
@@ -2560,7 +2560,7 @@
                 "id": 317
             },
             {
-                "name": "file4",
+                "name": "_file4",
                 "type": "string",
                 "id": 379
             },
@@ -2570,7 +2570,7 @@
                 "id": 336
             },
             {
-                "name": "file3",
+                "name": "_file3",
                 "type": "string",
                 "id": 205
             },
@@ -2580,7 +2580,7 @@
                 "id": 113
             },
             {
-                "name": "file2",
+                "name": "_file2",
                 "type": "string",
                 "id": 157
             },
@@ -2595,7 +2595,7 @@
                 "id": 184
             },
             {
-                "name": "file1",
+                "name": "_file1",
                 "type": "string",
                 "id": 144
             },
@@ -3390,7 +3390,7 @@
                             "cmd.uploader(key, uploader)"
                         ],
                         "collect": {
-                            "key": "file1",
+                            "key": "_file1",
                             "options": [
                                 {
                                     "default": true,
@@ -3475,7 +3475,7 @@
                             "cmd.uploader(key, uploader)"
                         ],
                         "collect": {
-                            "key": "file2",
+                            "key": "_file2",
                             "options": [
                                 {
                                     "default": true,
@@ -3560,7 +3560,7 @@
                             "cmd.uploader(key, uploader)"
                         ],
                         "collect": {
-                            "key": "file3",
+                            "key": "_file3",
                             "options": [
                                 {
                                     "default": true,
@@ -3645,7 +3645,7 @@
                             "cmd.uploader(key, uploader)"
                         ],
                         "collect": {
-                            "key": "file4",
+                            "key": "_file4",
                             "options": [
                                 {
                                     "default": true,
@@ -3693,7 +3693,7 @@
                             "cmd.uploader(key, uploader)"
                         ],
                         "collect": {
-                            "key": "file5",
+                            "key": "_file5",
                             "options": [
                                 {
                                     "default": true,
@@ -4109,7 +4109,7 @@
                 "id": 98
             },
             {
-                "name": "file5",
+                "name": "_file5",
                 "type": "string",
                 "id": 114
             },
@@ -4119,7 +4119,7 @@
                 "id": 219
             },
             {
-                "name": "file4",
+                "name": "_file4",
                 "type": "string",
                 "id": 255
             },
@@ -4129,7 +4129,7 @@
                 "id": 34
             },
             {
-                "name": "file3",
+                "name": "_file3",
                 "type": "string",
                 "id": 418
             },
@@ -4139,7 +4139,7 @@
                 "id": 352
             },
             {
-                "name": "file2",
+                "name": "_file2",
                 "type": "string",
                 "id": 251
             },
@@ -4154,7 +4154,7 @@
                 "id": 35
             },
             {
-                "name": "file1",
+                "name": "_file1",
                 "type": "string",
                 "id": 301
             },
