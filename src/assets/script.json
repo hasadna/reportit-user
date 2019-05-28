@@ -1021,7 +1021,7 @@
                             "cmd.createUser(context, record)"
                         ],
                         "collect": {
-                            "key": "agent_link",
+                            "key": "_agent_link",
                             "options": [
                                 {
                                     "default": true,
@@ -1133,7 +1133,7 @@
                     },
                     {
                         "text": [
-                            "<a href='{{agent_link}}' target='_blank'>קישור לבדיקות צד מוקדנ/ית</a>"
+                            "<a href='{{_agent_link}}' target='_blank'>קישור לבדיקות צד מוקדנ/ית</a>"
                         ]
                     },
                     {
@@ -2615,7 +2615,7 @@
                 "id": 130
             },
             {
-                "name": "agent_link",
+                "name": "_agent_link",
                 "type": "string",
                 "id": 489
             },
