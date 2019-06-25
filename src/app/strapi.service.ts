@@ -26,13 +26,7 @@ export class StrapiService {
 
   updateReport(data: any) {
     console.log('update', data);
-    return new Promise((resolve, _) => {
-      this.http.put(this.UPDATE_REPORT_URL.replace(':report_id', this.report_id), data)
-          .subscribe(() => {
-            console.log('updated user');
-            resolve();
-          });
-    });
+    return this.http.put(this.UPDATE_REPORT_URL.replace(':report_id', this.report_id), data);
   }
 
   uploadFile(file: File, path, progress, success) {

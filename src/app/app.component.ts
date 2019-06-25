@@ -14,10 +14,23 @@ import { async } from '@angular/core/testing';
 export class AppComponent implements OnInit {
   title = 'hatool';
   helpVisible = false;
+  moreInfoVisible = false;
+  started = false;
 
   constructor(private runner: ScriptRunnerService,
               private content: ContentService,
               private strapi: StrapiService) {}
+
+  prepareToSave(record) {
+    // filter records fields, to save those that do not start with '_'
+    const result = {};
+    for (const [key, value] of Object.entries(record)) {
+      if (key[0] !== '_') {
+        result[key] = value;
+      }
+    }
+    return result;
+  }
 
   ngOnInit() {
     this.content.M.sendButtonText = '';
@@ -33,19 +46,13 @@ export class AppComponent implements OnInit {
     // - Done Call updateUser(record) at selected points in the code.
     // - Go over the original flow and make sure all fields were migrated correctly to the script
     // - Done For uploading files call 'upload(key, uploader)' - it will return the link to the uploaded file
+  }
 
-
-    const recordKeysToSave = (record) => {
-      // filter records fields, to save those that do not start with '_'
-      const result = {};
-      for (const key in record) {
-        if (key.match(/^[^_]/)) {
-          result[key] = record[key];
-          }
-        }
-        return result;
-      };
-
+  start() {
+    if (this.started) {
+      return;
+    }
+    this.started = true;
     this.runner.run(
       'assets/script.json',
       0,
@@ -85,14 +92,15 @@ export class AppComponent implements OnInit {
             }
         },
         createUser: async (context, record) => {
-          const recordToSave = recordKeysToSave(record);
+          const recordToSave = this.prepareToSave(record);
           const vid = await this.strapi.createReport(recordToSave);
           context.vid = vid;
           return `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
         },
         saveUser: async (record) => {
-          const recordToSave = recordKeysToSave(record);
-          await this.strapi.updateReport(recordToSave);
+          const recordToSave = this.prepareToSave(record);
+          this.strapi.updateReport(recordToSave)
+            .subscribe(() => { console.log('UPDATED!'); });
         },
         uploader: async (key, uploader: FileUploader) => {
           uploader.active = true;

@@ -1,8 +1,15 @@
 .container {
     display: flex;
-    flex-flow: column;    
-    width: 100vw;
+    flex-flow: row;
+    justify-content: flex-start;
+    width: 200vw;
+    overflow-x: hidden;
     height: 100vh;
+    margin-right: 0;
+    transition: margin-right 1s;
+    &.started {
+        margin-right: -100vw;
+    }
 
     .header {
         height: 67px;
@@ -38,23 +45,10 @@
                 font-size: 14px;
                 cursor: pointer;
             }
-
-            .times {
-                display: none;
-                font-size: 24px;
-            }
-
-            &.active .question {
-                display: none;
-            }
-
-            &.active .times {
-                display: block;
-            }
         }
 
         .title {
-            flex: 1 1 100%;
+            flex: 1 1 auto;
             display: flex;
             flex-flow: column;
             justify-content: center;
@@ -65,28 +59,129 @@
         }
     }
 
-    .explanation {
+    .more-info-box {
         position: absolute;
-        top: 67px;
-        right: 0px;
+        top: 0;
+        right: 0;
         width: 100vw;
-        background-color: #fbfbfb;
-        display: none;
-        font-size: 16px;
-        font-weight: 300;
-        font-style: normal;
-        padding: 24px 28px;
-        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.08);
+        height: 100%;
 
-        &.active { 
-            display: block;
+        .content {
+            background-color: #fbfbfb;
+            box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.08);
+            padding: 24px 28px;
+        }
+    }
+
+    .explanation, .more-info-box {
+        display: flex;
+        flex-flow: column;
+        z-index: 2;
+
+        .header {
+            .times {
+                font-size: 24px;
+                cursor: pointer;
+            }
             z-index: 2;
+        }
+
+        .content {
+            font-size: 16px;
+            font-weight: 300;
+            font-style: normal;
+            flex: 1 1 100%;
+            overflow-y: scroll;
+        }
+
+    }
+
+    .introduction {
+        flex: 0 0 100vw;
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+    
+        .header {
+            box-shadow: none;            
+        }
+
+        .hero {
+            margin: 0 24px 0 60px;
+            h1 {
+                font-size: 36px;
+                font-weight: 500;
+                width: 80%;
+            }
+
+            .cta {
+                display: flex;
+                flex-flow: column;
+                justify-content: flex-start;
+
+                .button {
+                    border-radius: 20px;
+                    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
+                    background-image: radial-gradient(circle at 14% 0, #61ce9c, #6ddea1);
+                    font-size: 20px;
+                    font-weight: normal;
+                    color: #fff;
+                    padding: 10px 20px;
+                    margin: 10px 0;
+                    cursor: pointer;
+
+                    i {
+                        margin-right: 10px;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                }
+
+                .moreinfo {
+                    margin: 20px;
+                    font-size: 16px;
+                    color: #7f7f7f;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
         }
     }
 
     .chat {
-        flex: 1 1 auto;
-        width: 100%;
-        height: ~'calc(100vh - 67px)';
+        flex: 0 0 100vw;
+        display: flex;
+        flex-flow: column;
+
+        htl-hatool {
+            height: ~'calc(100vh - 67px)';
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 100vw;
+        &.started {
+            margin-right: 0;
+        }
+
+        .introduction {
+            flex: 0 0 50%;
+
+            .hero {
+                .cta {
+                    flex-flow: row;
+                }
+            }
+        }
+
+        .chat {
+            flex: 0 0 50%;
+
+            .header {
+                display: none;
+            }
+        }
     }
 }
