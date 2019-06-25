@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
               private strapi: StrapiService) {}
 
   ngOnInit() {
-    this.content.sendButtonText = '';
-    this.content.uploadFileText = 'לחצ/י לבחירת קובץ';
-    this.content.uploadedFileText = 'קובץ הועלה בהצלחה';
-    this.content.notUploadedFileText = 'תקלה בהעלאת קובץ';
-    this.content.inputPlaceholder = 'הקלידו הודעה...';
+    this.content.M.sendButtonText = '';
+    this.content.M.uploadFileText = 'לחצ/י לבחירת קובץ';
+    this.content.M.uploadedFileText = 'קובץ הועלה בהצלחה';
+    this.content.M.notUploadedFileText = 'תקלה בהעלאת קובץ';
+    this.content.M.inputPlaceholder = 'הקלידו הודעה...';
 
     // TODO for Noam:
     // - Done: Fix the isWorkingHours function
