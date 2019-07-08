@@ -89,6 +89,8 @@ export class AppComponent implements OnInit {
               } else {
                 return 'false';
               }
+            } else {
+              return 'false';
             }
         },
         createUser: async (context, record) => {
