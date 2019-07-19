@@ -1266,7 +1266,7 @@
                             "מהו שם המוסד/המכללה?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
                             "options": [
                                 {
                                     "default": true,
@@ -1294,7 +1294,7 @@
                             "מה שם בית הספר?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
                             "options": [
                                 {
                                     "default": true,
@@ -1303,6 +1303,26 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "text": [
+                            "באיזו עיר או ישוב נמצא בית הספר?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
                     },
                     {
                         "action": "חינוך: בחירת זרם חינוכי של המסגרת"
@@ -1317,7 +1337,22 @@
                             "מה שם הגן?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "באיזו עיר או ישוב נמצא הגן?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
                             "options": [
                                 {
                                     "default": true,
@@ -1340,7 +1375,7 @@
                             "מה שם הגן?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
                             "options": [
                                 {
                                     "default": true,
@@ -1349,6 +1384,26 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "text": [
+                            "באיזו עיר או ישוב נמצא הגן?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
                     },
                     {
                         "action": "חינוך: בחירת זרם חינוכי של המסגרת"
@@ -1363,7 +1418,7 @@
                             "מה שם הגן?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
                             "options": [
                                 {
                                     "default": true,
@@ -1372,6 +1427,26 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "text": [
+                            "באיזו עיר או ישוב נמצא המוסד?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
                     },
                     {
                         "action": "חינוך: בחירת זרם חינוכי של המסגרת"
@@ -1386,7 +1461,7 @@
                             "מה שם הגן?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
                             "options": [
                                 {
                                     "default": true,
@@ -1395,6 +1470,26 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "text": [
+                            "באיזו עיר או ישוב נמצא הגן?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
                     },
                     {
                         "action": "חינוך: בירור הרקע לאפליה"
@@ -1409,7 +1504,7 @@
                             "היכן או באיזו מסגרת התקיים החוג?"
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_organization",
                             "options": [
                                 {
                                     "default": true,
@@ -1420,6 +1515,26 @@
                         }
                     },
                     {
+                        "text": [
+                            "באיזו עיר או ישוב מתקיים החוג?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
+                    {
                         "action": "חינוך: בירור הרקע לאפליה"
                     }
                 ]
@@ -1427,6 +1542,41 @@
             {
                 "topic": "חינוך: אחר",
                 "script": [
+                    {
+                        "text": [
+                            "מהו הארגון או המסגרת בהם התקיים הארוע?"
+                        ],
+                        "collect": {
+                            "key": "offender_organization",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "באיזו עיר או ישוב התרחש הארוע?"
+                        ],
+                        "collect": {
+                            "key": "event_location",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": [
+                            "cmd.saveUser(record)"
+                        ]
+                    },
                     {
                         "action": "חינוך: בירור הרקע לאפליה"
                     }
