@@ -2079,7 +2079,7 @@
                             }
                         ],
                         "collect": {
-                            "key": "offender_organization_details",
+                            "key": "offender_details",
                             "options": [
                                 {
                                     "default": true,
