@@ -2,7 +2,10 @@
   <div class='more-info-box' *ngIf='moreInfoVisible'>
     <div class='header'>
       <div class='help' (click)='moreInfoVisible = false'>
-        <span class='times'>&times;</span>
+        <span class='close'>
+          <i class='fas fa-chevron-right'></i>
+          <span>חזרה<br/>לדיווח</span>
+        </span>
       </div>
       <div class='title'>דיווח על מקרי גזענות ממסדית</div>
     </div>

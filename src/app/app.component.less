@@ -21,7 +21,7 @@
         flex-flow: row;
 
         .help {
-            width: 67px;
+            min-width: 67px;
             height: 100%;
             display: flex;
             flex: 0 0 auto;
@@ -65,8 +65,14 @@
         z-index: 2;
 
         .header {
-            .times {
-                font-size: 24px;
+            .close {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                i {
+                    margin-left: 5px;
+                }
+                font-size: 14px;
                 cursor: pointer;
             }
             z-index: 2;
