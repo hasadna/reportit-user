@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ScriptRunnerService, ContentService } from 'hatool';
 import { StrapiService } from './strapi.service';
 import { FileUploader } from 'hatool';
-import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -54,7 +53,7 @@ export class AppComponent implements OnInit {
     }
     this.started = true;
     this.runner.run(
-      'assets/script.json',
+      'https://raw.githubusercontent.com/hasadna/reportit-scripts/master/src/user/script.json',
       0,
       {
         isWorkingTime: () => {
@@ -81,28 +80,18 @@ export class AppComponent implements OnInit {
             const [dayStartHour, dayStartMinute] = workTimes[dayOfTheWeek]['start'].split(':');
             const [dayEndtHour, dayEndMinute] = workTimes[dayOfTheWeek]['end'].split(':');
             console.log(currentMinute <= dayEndMinute);
-            if (
+            return (
                 (currentHour > dayStartHour || (currentHour === dayStartHour && currentMinute >= dayStartMinute)) &&
                 (currentHour < dayEndtHour || (currentHour === dayEndtHour && currentMinute <= dayEndMinute))
-              ) {
-                return 'true';
-              } else {
-                return 'false';
-              }
-            } else {
-              return 'false';
-            }
+            );
+          }
+          return false;
         },
         createUser: async (context, record) => {
           const recordToSave = this.prepareToSave(record);
           const vid = await this.strapi.createReport(recordToSave);
           context.vid = vid;
           return `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
-        },
-        saveUser: async (record) => {
-          const recordToSave = this.prepareToSave(record);
-          this.strapi.updateReport(recordToSave)
-            .subscribe(() => { console.log('UPDATED!'); });
         },
         uploader: async (key, uploader: FileUploader) => {
           uploader.active = true;
@@ -120,7 +109,11 @@ export class AppComponent implements OnInit {
           record.offender_organization_category = 'חברת תיווך';
         }
       },
-      (key, value) => {}
+      (key, value, record) => {
+        const recordToSave = this.prepareToSave(record);
+        return this.strapi.updateReport(recordToSave)
+          .subscribe(() => { console.log('UPDATED!'); });
+      }
     ).subscribe(() => { console.log('done!'); });
   }
 
