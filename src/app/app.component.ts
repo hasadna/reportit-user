@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   helpVisible = false;
   moreInfoVisible = false;
   started = false;
+  created = false;
 
   constructor(private runner: ScriptRunnerService,
               private content: ContentService,
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
       return;
     }
     this.started = true;
+    this.created = false;
     this.runner.run(
       'https://raw.githubusercontent.com/hasadna/reportit-scripts/master/src/user/script.json',
       0,
@@ -91,6 +93,7 @@ export class AppComponent implements OnInit {
           const recordToSave = this.prepareToSave(record);
           const vid = await this.strapi.createReport(recordToSave);
           context.vid = vid;
+          this.created = true;
           return `https://hasadna.github.io/reportit-agent/?vid=${vid}`;
         },
         uploader: async (key, uploader: FileUploader) => {
@@ -110,12 +113,10 @@ export class AppComponent implements OnInit {
         }
       },
       (key, value, record) => {
-        if (key !== 'full_name') {
+        if (this.created) {
           const recordToSave = this.prepareToSave(record);
-          if (Object.keys(recordToSave).length) {
-            return this.strapi.updateReport(recordToSave)
-              .subscribe(() => { console.log('UPDATED!'); });
-          }
+          return this.strapi.updateReport(recordToSave)
+            .subscribe(() => { console.log('UPDATED!'); });
         }
       }
     ).subscribe(() => { console.log('done!'); });
