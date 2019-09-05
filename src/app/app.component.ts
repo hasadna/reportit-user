@@ -110,9 +110,11 @@ export class AppComponent implements OnInit {
         }
       },
       (key, value, record) => {
-        const recordToSave = this.prepareToSave(record);
-        return this.strapi.updateReport(recordToSave)
-          .subscribe(() => { console.log('UPDATED!'); });
+        if (key !== 'full_name') {
+          const recordToSave = this.prepareToSave(record);
+          return this.strapi.updateReport(recordToSave)
+            .subscribe(() => { console.log('UPDATED!'); });
+        }
       }
     ).subscribe(() => { console.log('done!'); });
   }
