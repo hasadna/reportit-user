@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 
+const BASE_URL = 'https://cms.equality.org.il/';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class StrapiService {
 
-  CREATE_REPORT_URL = 'https://reportit-cms.obudget.org/reports';
-  UPDATE_REPORT_URL = 'https://reportit-cms.obudget.org/reports/:report_id';
-  FILE_UPLOAD = 'https://reportit-cms.obudget.org/upload/';
+  CREATE_REPORT_URL = BASE_URL + 'reports';
+  UPDATE_REPORT_URL = BASE_URL + 'reports/:report_id';
+  FILE_UPLOAD = BASE_URL + 'upload/';
   report_id: any = null;
 
   constructor(private http: HttpClient) { }
