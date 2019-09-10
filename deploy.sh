@@ -4,6 +4,7 @@ git checkout master && \
 git checkout -b dist && \
 rm .gitignore && \
 ng build --prod && \
+cp CNAME dist/reportit-agent/ && \
 git add dist/reportit-user && \
 git commit -m dist && \
 (git branch -D gh-pages || true) && \
