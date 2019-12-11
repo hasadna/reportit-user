@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ScriptRunnerService, ContentService } from 'hatool';
 import { StrapiService } from './strapi.service';
 import { FileUploader } from 'hatool';
@@ -10,12 +10,17 @@ import { FileUploader } from 'hatool';
   styleUrls: ['./app.component.less']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'hatool';
   helpVisible = false;
   moreInfoVisible = false;
   started = false;
   created = false;
+
+  @ViewChild('uploadFileText') uploadFileText: ElementRef;
+  @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
+  @ViewChild('notUploadedFileText') notUploadedFileText: ElementRef;
+  @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
 
   constructor(private runner: ScriptRunnerService,
               private content: ContentService,
@@ -32,12 +37,15 @@ export class AppComponent implements OnInit {
     return result;
   }
 
+  ngAfterViewInit() {
+    this.content.M.uploadFileText = this.uploadFileText.nativeElement.innerHTML;
+    this.content.M.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
+    this.content.M.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
+    this.content.M.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
+  }
+
   ngOnInit() {
     this.content.M.sendButtonText = '';
-    this.content.M.uploadFileText = 'לחצ/י לבחירת קובץ';
-    this.content.M.uploadedFileText = 'קובץ הועלה בהצלחה';
-    this.content.M.notUploadedFileText = 'תקלה בהעלאת קובץ';
-    this.content.M.inputPlaceholder = 'הקלידו הודעה...';
 
     // TODO for Noam:
     // - Done: Fix the isWorkingHours function
