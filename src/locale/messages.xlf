@@ -220,7 +220,7 @@
       </trans-unit>
       <trans-unit id="466b774b68a0cf411642684098a6cccaa410c408" datatype="html">
         <source>שלום,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-      הגעת למוקד סיוע לנפגעי גזענות ואפליה ממסדית.</source>
+      לצ'ט האוטומטי של האגודה לזכויות האזרח לדיווח על גזענות ואפליה.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.html</context>
           <context context-type="linenumber">69</context>
