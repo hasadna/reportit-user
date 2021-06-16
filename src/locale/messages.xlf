@@ -218,9 +218,9 @@
           <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="466b774b68a0cf411642684098a6cccaa410c408" datatype="html">
+      <trans-unit id="b9c871b6ce9f008113a2d5fc00c8510d9fe65250" datatype="html">
         <source>שלום,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-      לצ'ט האוטומטי של האגודה לזכויות האזרח לדיווח על גזענות ואפליה.</source>
+        לצ&apos;ט האוטומטי של האגודה לזכויות האזרח לדיווח על גזענות ואפליה</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.html</context>
           <context context-type="linenumber">69</context>
@@ -240,28 +240,28 @@
           <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2b299db3b08e59a7b03bd8da3ed8a2d567c14da5" datatype="html">
+      <trans-unit id="b6643f663266ad05323d729384ef8298c3ff65ce" datatype="html">
         <source>
-          נתקלתם בגזענות או אפליה? רוצים לדווח עליה או לדעת מה אפשר לעשות? 
+            נתקלת בגזענות או אפליה? רוצה לדווח עליה או לדעת מה אפשר לעשות? יש מה לעשות!            
           </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.html</context>
           <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="08e52622e8bb8e25b753640ca2873dc8e5e3333c" datatype="html">
+      <trans-unit id="7f2f2b620320b563cd0f0f4cf53577a8aeb40bff" datatype="html">
         <source>
-            שלחו לנו את פרטי המקרה 24/7 ונחזור אליכם עם תשובות והמלצות לפעולה
+            אפשר לשלוח לנו את פרטי המקרה 24/7 ונחזור בהקדם האפשרי עם תשובות והמלצות לפעולה.
           </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.html</context>
           <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d53025e82ad750419c8904e9e19d72774573cec0" datatype="html">
+      <trans-unit id="4d1def88ddcd740a4e8e6dc0fc6126c9d0201f19" datatype="html">
         <source>
             התנהגות גזענית ומפלה היא תופעה נפוצה בחברה הישראלית.
-            כדי למגר אותה חשוב שלא נשתוק ולא נוותר כשאנחנו נתקלים במקרים כאלה.
+            כדי למגר אותה חשוב שלא נשתוק ולא נוותר במקרים כאלה.
           </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.html</context>
