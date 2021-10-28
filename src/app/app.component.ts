@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID } from '@angular/core';
 import { ScriptRunnerService, ContentService } from 'hatool';
 import { StrapiService } from './strapi.service';
 import { FileUploader } from 'hatool';
@@ -24,7 +24,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(private runner: ScriptRunnerService,
               private content: ContentService,
-              private strapi: StrapiService) {}
+              private strapi: StrapiService,
+              @Inject(LOCALE_ID) public language: string) {}
 
   prepareToSave(record) {
     // filter records fields, to save those that do not start with '_'
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.content.M.sendButtonText = '';
-
+    console.log('LANGUAGE', this.language);
     // TODO for Noam:
     // - Done: Fix the isWorkingHours function
     // - Done Call the createUser(context, record) at some point in the script
