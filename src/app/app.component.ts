@@ -47,7 +47,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.content.M.sendButtonText = '';
-    console.log('LANGUAGE', this.language);
     // TODO for Noam:
     // - Done: Fix the isWorkingHours function
     // - Done Call the createUser(context, record) at some point in the script
@@ -55,6 +54,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     // - Done Call updateUser(record) at selected points in the code.
     // - Go over the original flow and make sure all fields were migrated correctly to the script
     // - Done For uploading files call 'upload(key, uploader)' - it will return the link to the uploaded file
+  }
+
+  get arabic() {
+    return this.language === 'ar';
   }
 
   start() {

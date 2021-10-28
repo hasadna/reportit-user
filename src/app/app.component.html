@@ -86,8 +86,8 @@
           </p>
 
           <p class='language-selection'>
-            <a href='/ar/' i18n>לאתר בשפה הערבית</a>
-            <a href='/' i18n>לאתר בשפה העברית</a>
+            <a *ngIf='!arabic' href='/ar/' i18n>للموقع باللغة العربية</a>
+            <a *ngIf='arabic' href='/' i18n>לאתר בשפה העברית</a>
           </p>
         </div>
       </div>
